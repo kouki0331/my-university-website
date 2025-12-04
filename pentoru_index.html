@@ -103,14 +103,15 @@
         /* メインビジュアル */
         #main-visual-banner {
             height: 400px;
-            background-image: url('images/Gemini_Generated_Image_8n89s08n89s08n89.jpg');
+            /* メインビジュアルは遅延ロードしない */
+            background-image: url('images/Gemini_Generated_Image_8n89s08n89s08n89.jpg'); 
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 5px rgba(0, 0, 0, 0.7);
         }
         #main-visual-banner h2 {
             color: var(--white);
@@ -118,9 +119,7 @@
             letter-spacing: 2px;
             border-bottom: none;
             padding-bottom: 0;
-        }
-        #main-visual-banner h2::after {
-            display: none;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.5);
         }
         #main-visual-banner p {
             font-size: 1.2em;
@@ -300,6 +299,24 @@
             color: var(--corporate-color);
             font-weight: bold;
         }
+        
+        /* 利用規約ページ（新規） */
+        #privacy-page {
+            background-color: var(--white);
+        }
+        #privacy-page h3 {
+            color: var(--accent-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+        #privacy-page p, #privacy-page ul {
+            margin-bottom: 20px;
+            padding-left: 10px;
+            color: var(--sub-text-color);
+        }
+
+
         /* Contact Page (省略) */
 
         /* モーダル (製品詳細) */
@@ -707,8 +724,8 @@
             </a>
         </div>
         <nav>
+            <a id="nav-news" data-page="index" href="#news" aria-current="false">TOP / NEWS</a> 
             <a id="nav-products" data-page="products" href="#products" aria-current="false">PRODUCTS</a> 
-            <a id="nav-news" data-page="index" href="#news" aria-current="false">NEWS / TOPICS</a>
             <a id="nav-company" data-page="company" href="#company" aria-current="false">CORPORATE</a> 
             <a id="nav-recruitment" data-page="recruitment" href="#recruitment" aria-current="false">RECRUITMENT</a> 
             <a id="nav-contact" data-page="contact" href="#contact" aria-current="false">CONTACT</a>
@@ -887,6 +904,46 @@
             </form>
         </div>
 
+        <div id="privacy-page" style="display:none;" class="section-padding">
+            <h2>PRIVACY POLICY / 個人情報の取り扱いについて</h2>
+            
+            <p style="font-size: 0.9em; text-align: right; color: var(--sub-text-color);">制定日：2025年11月27日</p>
+
+            <p>株式会社ぺんとる（以下「ぺんとる」といいます）では、お客様のプライバシーを尊重し、個人情報の取り扱いに関して以下のような指針を定め、それに従ってその保護に努めております。</p>
+
+            <h3 style="margin-top: 40px;">個人情報の利用目的について</h3>
+            <p>ぺんとるでは、サービスの充実と製品の品質向上のため、お客様から個人情報を頂いております。 提供された個人情報は、以下の目的以外の用途には利用しません。</p>
+            <ul>
+                <li>製品・サービスの提供及び品質向上のため</li>
+                <li>お客様からのお問い合わせ、ご要望への対応のため</li>
+                <li>製品に関する情報提供（メールマガジン等）のため</li>
+                <li>アンケート等による市場調査および製品開発のため</li>
+            </ul>
+
+            <h3 style="margin-top: 40px;">個人情報をご提供いただく場合</h3>
+            <p>ぺんとるでは、お客様のメールアドレス、個人名などの個人情報を登録時や、製品・サービスに関するアンケート形式等により、任意でお客様の個人情報をお聞きすることがあります。</p>
+
+            <h3 style="margin-top: 40px;">個人情報の第三者への開示・提供について</h3>
+            <p>ぺんとるは、お客様ご本人の同意がある場合を除き、個人情報を第三者に開示することはありません。</p>
+            <p>ただし、以下の場合は例外として開示することがあります。</p>
+            <ul>
+                <li>お客様にサービスを提供する目的で、特定の業務委託先（配送業者、決済代行業者など）に委託業務を依頼する場合に、その業務運営に必要な情報に限り個人情報を提供する場合。</li>
+                <li>法令により開示を求められた場合、又は公共利益のために裁判所、警察等の公的機関から開示を求められた場合。</li>
+                <li>個人を特定出来ないよう統計的に処理したのち、その統計情報を第三者に開示する場合。</li>
+                <li>その他、前述以外の目的で第三者に開示する場合には、事前にお客様ご本人の同意を得ることとします。</li>
+            </ul>
+
+            <h3 style="margin-top: 40px;">個人情報の保護・管理について</h3>
+            <p>ぺんとるでは、収集した個人情報を管理する際は、管理責任者を定め、細心の注意を払って適切に管理します。外部からの不正アクセス又は紛失、破壊、改ざん等の危険に対しては、適切かつ合理的なレベルの安全対策を施し、お客様の個人情報の保護に努めます。</p>
+            <p>又、個人情報に係るデータベース等へのアクセスについては、アクセス権を有する者を限定し、社内においても不正な利用がされないよう厳重に管理します。</p>
+
+            <h3 style="margin-top: 40px;">ご注意（指針の変更）</h3>
+            <p>なお、ぺんとるでは、サービスの内容や技術動向の変化にともない、この「個人情報の取り扱いについて」の内容を変更することがあります。変更の際は、このページでご確認をお願いいたします。</p>
+
+            <h3 style="margin-top: 40px;">お問い合わせ</h3>
+            <p>個人情報の取り扱いに関するご意見・ご要望がございましたら、<a href="#contact" onclick="showPage('contact'); return false;" style="color: var(--accent-color); font-weight: bold;">お客様相談室の問い合わせフォーム</a>よりご連絡ください。</p>
+        </div>
+        
         <div id="error-page" style="display:none;">
             <h2>404</h2>
             <p>お探しのページは見つかりませんでした。</p>
@@ -914,7 +971,7 @@
             <a href="#company" onclick="showPage('company'); return false;">CORPORATE</a>
             <a href="#recruitment" onclick="showPage('recruitment'); showRecruitmentTab('intern'); return false;">INTERN</a>
             <a href="#contact" onclick="showPage('contact'); return false;">CONTACT</a>
-            <a href="#" onclick="alert('プライバシーポリシーへ遷移します'); return false;">プライバシーポリシー</a>
+            <a href="#privacy" onclick="showPage('privacy'); return false;">プライバシーポリシー</a>
             <a href="#" onclick="alert('利用規約へ遷移します'); return false;">利用規約</a>
         </div>
         <div class="social-links">
@@ -990,13 +1047,14 @@
             'company': { title: '企業情報 | ぺんとる', desc: 'ぺんとるの企業理念、会社概要、ミッション。素材に挑み、未来を描く。' },
             'recruitment': { title: '採用情報・インターンシップ | ぺんとる', desc: 'ぺんとる採用情報。新卒採用とインターンシップ情報を掲載しています。' },
             'contact': { title: 'お問い合わせ | ぺんとる', desc: '製品、企業、採用に関するお問い合わせ窓口。' },
+            'privacy': { title: 'プライバシーポリシー | ぺんとる', desc: '株式会社ぺんとるの個人情報の取り扱いに関する指針です。' },
             'error': { title: '404 ページが見つかりません | ぺんとる', desc: 'お探しのページは見つかりませんでした。' }
         };
 
         // インターンフォームデータとステップ管理
         let internFormData = {};
         
-        // **【修正点 1】日程選択フィールドを追加**
+        // 日程選択フィールド
         const formFields = [
             { id: 'name', label: '氏名', required: true },
             { id: 'university', label: '大学名', required: true },
@@ -1007,7 +1065,6 @@
                 required: true, 
                 type: 'radio', 
                 options: [
-                    // **[画像からの日時を反映]**
                     { value: '20251215-16', label: '12月15日(月)～16日(火)' },
                     { value: '20251222-23', label: '12月22日(月)～23日(火)' }
                 ]
@@ -1070,7 +1127,9 @@
                 window.history.pushState({ page: pageId, product: productId }, '', stateUrl);
             }
 
+            // 【改善点1】製品ページが表示されたときだけリスナーを設定・フィルタを実行
             if (pageId === 'products') {
+                 setupProductPageListeners(); // 製品ページ専用リスナーを設定
                  filterAndSortProducts();
             } else if (pageId === 'recruitment') {
                 const hashPart = window.location.hash.split('/')[1];
@@ -1117,6 +1176,7 @@
             container.innerHTML = '';
             
             const featuredIds = ["Z1", "Eraser1", "MP1"]; 
+            const fragment = document.createDocumentFragment();
 
             featuredIds.forEach(id => {
                 const detail = productDetails[id];
@@ -1133,6 +1193,7 @@
 
                 const imageSrc = detail.images[0] || 'placeholder.png';
                 
+                // 【改善点2】画像に loading="lazy" を追加
                 card.innerHTML = `
                     <div class="image-placeholder">
                         <img src="${imageSrc}" alt="${detail.name}の画像" loading="lazy" onerror="this.src='placeholder.png';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.8em;\\'>画像エラー</div>'">
@@ -1143,8 +1204,9 @@
                         <p class="price">${detail.priceDisplay}</p>
                     </div>
                 `;
-                container.appendChild(card);
+                fragment.appendChild(card);
             });
+            container.appendChild(fragment); // 一度にDOMに追加
         }
         
         // 商品一覧をレンダリングする関数
@@ -1158,6 +1220,9 @@
                 return;
             }
 
+            // 【改善点3】DocumentFragment を使用して DOM 操作の負荷を軽減
+            const fragment = document.createDocumentFragment();
+
             products.forEach(detail => {
                 const card = document.createElement('a'); 
                 card.className = 'product-card';
@@ -1170,6 +1235,7 @@
 
                 const imageSrc = detail.images[0] || 'placeholder.png';
                 
+                // 【改善点2】画像に loading="lazy" を追加
                 card.innerHTML = `
                     <div class="image-placeholder">
                         <img src="${imageSrc}" alt="${detail.name}の画像" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.9em;\\'>画像エラー</div>'">
@@ -1180,8 +1246,10 @@
                         <p class="price">${detail.priceDisplay}</p>
                     </div>
                 `;
-                container.appendChild(card);
+                fragment.appendChild(card); // フラグメントに追加
             });
+
+            container.appendChild(fragment); // 一度にDOMに追加
         }
 
         // フィルタリングとソートを実行する関数
@@ -1297,7 +1365,8 @@
                     <div class="modal-thumbnail-gallery">
                 `;
                 detail.images.forEach((imgSrc, index) => {
-                    galleryHtml += `<img src="${imgSrc}" alt="${detail.name}のサムネイル${index + 1}" class="${index === 0 ? 'active' : ''}" onclick="updateMainImage('${imgSrc}')">`;
+                    // モーダル内の画像は必要になるまでロードされるよう、ここでも loading="lazy" を適用
+                    galleryHtml += `<img src="${imgSrc}" alt="${detail.name}のサムネイル${index + 1}" class="${index === 0 ? 'active' : ''}" onclick="updateMainImage('${imgSrc}')" loading="lazy">`;
                 });
                 galleryHtml += `</div>`;
             }
@@ -1338,7 +1407,7 @@
                     ${featuresHtml}
                     
                     <h3 style="margin-top: 30px;">ご購入・レビュー</h3>
-                    <p>この商品は全国の文具店、またはオンラインストアにてお買い求めいただけます。ご購入後のレビューも募集中です！</p>
+                    <p>この商品は全国の文具店、またはオンラインストアにてお買い求めいただけます。ご購入後のレビューも募集中です。</p>
                 </div>
             `;
 
@@ -1445,7 +1514,7 @@
                 const type = field.type || 'text';
                 const requiredClass = field.required ? ' required' : '';
                 
-                // **【修正点 2】ラジオボタンの生成ロジックを追加**
+                // ラジオボタンの生成ロジック
                 if (type === 'radio' && field.options) {
                     let radioHtml = `<div class="form-group">
                                         <label class="${requiredClass}">${field.label}</label>
@@ -1497,7 +1566,7 @@
                 const errorElement = document.getElementById(`${field.id}-error`);
                 if (!errorElement) return;
 
-                // **【修正点 3-1】ラジオボタンのバリデーションロジック**
+                // ラジオボタンのバリデーションロジック
                 if (field.type === 'radio') {
                     const selectedRadio = document.querySelector(`input[name="${field.id}"]:checked`);
                     if (selectedRadio) {
@@ -1532,7 +1601,7 @@
             });
 
             if (isValid) {
-                // **【修正点 3-2】バリデーション通過後にデータを格納**
+                // バリデーション通過後にデータを格納
                 internFormData = currentData;
                 showConfirmScreen();
             }
@@ -1550,7 +1619,7 @@
             confirmHtml += '<p>以下の内容で間違いがないかご確認ください。</p>';
             confirmHtml += '<table class="confirm-table">';
             
-            // **【修正点 4】確認画面の表示ロジックを修正 (特に日程)**
+            // 確認画面の表示ロジック
             formFields.forEach(field => {
                 let displayValue = internFormData[field.id];
                 
@@ -1600,14 +1669,49 @@
 
         // === 7. 初期化とイベントリスナー ===
 
+        // 【改善点1】製品ページ専用のリスナーを設定する関数を分離
+        function setupProductPageListeners() {
+            const categoryFilter = document.getElementById('category-filter');
+            // データ属性を使って、リスナーが設定済みか確認
+            if (categoryFilter && categoryFilter.getAttribute('data-listeners-set') !== 'true') {
+                const priceFilter = document.getElementById('price-filter');
+                const sortSelect = document.getElementById('sort-select');
+                const searchBox = document.getElementById('search-box');
+
+                categoryFilter.addEventListener('change', filterAndSortProducts);
+                priceFilter.addEventListener('change', filterAndSortProducts);
+                sortSelect.addEventListener('change', filterAndSortProducts);
+                
+                // 検索サジェスト機能のリスナー設定
+                if (searchBox) {
+                    const suggestionsDiv = document.getElementById('search-suggestions');
+                    searchBox.addEventListener('input', (e) => {
+                        filterAndSortProducts();
+                        showSearchSuggestions(e.target.value);
+                    });
+                    searchBox.addEventListener('blur', () => {
+                        setTimeout(() => { 
+                            if (suggestionsDiv) suggestionsDiv.style.display = 'none'; 
+                        }, 150); 
+                    });
+                    searchBox.addEventListener('focus', (e) => {
+                        showSearchSuggestions(e.target.value);
+                    });
+                }
+                // リスナー設定済みのフラグをセット
+                categoryFilter.setAttribute('data-listeners-set', 'true');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. 必須要素の初期化
+            // 1. 必須要素の初期化 (高速化のため、初期化は最小限に留める)
             pages = {
                 'index': document.getElementById('index-page'),
                 'products': document.getElementById('products-page'),
                 'company': document.getElementById('company-page'),
                 'recruitment': document.getElementById('recruitment-page'), 
                 'contact': document.getElementById('contact-page'),
+                'privacy': document.getElementById('privacy-page'), 
                 'error': document.getElementById('error-page') 
             };
             navLinks = document.querySelectorAll('header nav a');
@@ -1616,54 +1720,36 @@
             // 2. ニュースリストの生成
             const newsList = document.getElementById('newsList');
             if (newsList) {
+                 const fragment = document.createDocumentFragment();
                  news.forEach(item => {
                     const li = document.createElement('li');
                     li.innerHTML = `<span style="font-weight: bold; margin-right: 10px; color: var(--accent-color);">${item.date}</span> <span>${item.text}</span>`;
-                    newsList.appendChild(li);
+                    fragment.appendChild(li);
                 });
+                newsList.appendChild(fragment);
             }
 
-            // 3. フィルタ・ソート機能のイベントリスナー設定
-            const categoryFilter = document.getElementById('category-filter');
-            const priceFilter = document.getElementById('price-filter');
-            const sortSelect = document.getElementById('sort-select');
-            const searchBox = document.getElementById('search-box');
+            // 3. フィルタ・ソート機能のイベントリスナー設定 (→ setupProductPageListenersへ移動)
 
-            if (categoryFilter) categoryFilter.addEventListener('change', filterAndSortProducts);
-            if (priceFilter) priceFilter.addEventListener('change', filterAndSortProducts);
-            if (sortSelect) sortSelect.addEventListener('change', filterAndSortProducts);
-            
-            // 検索サジェスト機能のリスナー設定
-            if (searchBox) {
-                const suggestionsDiv = document.getElementById('search-suggestions');
-                searchBox.addEventListener('input', (e) => {
-                    filterAndSortProducts();
-                    showSearchSuggestions(e.target.value);
-                });
-                searchBox.addEventListener('blur', () => {
-                    setTimeout(() => { 
-                        if (suggestionsDiv) suggestionsDiv.style.display = 'none'; 
-                    }, 150); 
-                });
-                searchBox.addEventListener('focus', (e) => {
-                    showSearchSuggestions(e.target.value);
-                });
-            }
-
-            // 4. ナビゲーションリンクのイベントリスナー設定
+            // 4. ナビゲーションリンクのイベントリスナー設定 (変更なし)
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const pageId = link.getAttribute('data-page');
 
                     if (link.id === 'nav-news') {
-                        showPage('index'); 
-                        setTimeout(() => { 
-                            const newsAnchor = document.getElementById('news-anchor');
-                            if (newsAnchor) {
-                                newsAnchor.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        }, 100); 
+                        const targetHash = link.getAttribute('href');
+                        if (targetHash.includes('#news')) {
+                            showPage('index'); 
+                            setTimeout(() => { 
+                                const newsAnchor = document.getElementById('news-anchor');
+                                if (newsAnchor) {
+                                    newsAnchor.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }, 100); 
+                        } else {
+                            showPage('index');
+                        }
                     } else {
                         showPage(pageId);
                     }
@@ -1671,7 +1757,7 @@
                 });
             });
             
-            // 5. モーダル関連イベントリスナー
+            // 5. モーダル関連イベントリスナー (変更なし)
             const modalCloseBtn = document.getElementById('modal-close-btn');
             if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProductModal);
             if (modalBackdrop) {
@@ -1687,7 +1773,7 @@
                 }
             });
 
-            // 6. ブラウザの「戻る/進む」ボタンに対応
+            // 6. ブラウザの「戻る/進む」ボタンに対応 (変更なし)
             window.addEventListener('popstate', (e) => {
                 if (window.location.hash.includes('#products/') && e.state && e.state.product) {
                     openProductModal(e.state.product);
@@ -1699,7 +1785,7 @@
                 }
             });
             
-            // 7. Topへ戻るボタンの表示/非表示制御
+            // 7. Topへ戻るボタンの表示/非表示制御 (変更なし)
             const backToTopButton = document.getElementById('back-to-top');
             if (backToTopButton) {
                 window.addEventListener('scroll', () => {
@@ -1717,7 +1803,7 @@
                 });
             }
             
-            // 8. 製品ナビゲーターのイベントリスナー設定
+            // 8. 製品ナビゲーターのイベントリスナー設定 (変更なし)
             setupProductNavListeners();
             
             // 9. トップページの注目製品をレンダリング
