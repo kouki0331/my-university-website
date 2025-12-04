@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ぺんとる - 「書く」「消す」の未来をデザインする文具メーカー</title>
+    <title id="page-title">ぺんとる - 「書く」「消す」の未来をデザインする文具メーカー</title>
+    <meta name="description" id="page-description" content="ぺんとる公式サイト。革新的な筆記具、消しゴム、紙製品のラインナップをご紹介します。">
+    <link rel="icon" href="images/favicon.png" type="image/png">
     
     <style>
         /* CSS変数の定義 */
@@ -15,6 +17,7 @@
             --text-color: #333;
             --sub-text-color: #666;
             --corporate-color: #333; 
+            --shadow-color: rgba(0, 0, 0, 0.15);
         }
 
         /* 共通基本設定 */
@@ -26,7 +29,7 @@
             color: var(--text-color); 
             background-color: var(--light-bg); 
             font-size: 16px; 
-            scroll-behavior: smooth; /* スムーズスクロール追加 */
+            scroll-behavior: smooth;
         }
         h1, h2, h3 { 
             color: var(--main-color); 
@@ -34,7 +37,7 @@
             margin-bottom: 0.5em; 
         }
         h1 { 
-            font-size: 2.2em; 
+            font-size: 1.8em; 
             font-weight: 700; 
         }
         h2 { 
@@ -52,8 +55,8 @@
             left: 50%;
             transform: translateX(-50%);
             bottom: 0;
-            width: 60px; /* 線を長くして存在感を出す */
-            height: 4px; /* 線を太くする */
+            width: 60px;
+            height: 4px;
             background-color: var(--accent-color);
         }
         .content { 
@@ -62,7 +65,7 @@
             padding: 0; 
         }
         .section-padding { max-width: 1000px; margin: 0 auto; padding: 80px 20px; }
-        
+
         /* ヘッダーとナビゲーション */
         header { 
             background-color: var(--white); 
@@ -71,8 +74,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #eee;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* 影を強調 */
-            position: sticky; /* スティッキーヘッダー */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            position: sticky;
             top: 0;
             z-index: 1000;
         }
@@ -81,14 +84,14 @@
         header p { margin: 0; font-size: 0.9em; color: var(--sub-text-color); }
         
         nav a { 
-            display: inline-block; /* floatをinline-blockに変更 */
+            display: inline-block;
             color: var(--main-color); 
             text-align: center; 
             padding: 10px 15px; 
             margin-left: 10px;
             text-decoration: none; 
             font-weight: bold; 
-            transition: background-color 0.3s, color 0.3s; 
+            transition: color 0.3s; 
             font-size: 0.95em; 
             border-bottom: 3px solid transparent;
         }
@@ -97,209 +100,600 @@
             border-bottom: 3px solid var(--accent-color);
         }
 
-        /* トップページ (index) */
-        #main-visual-banner { 
-            height: 450px; 
-            margin-bottom: 0; 
-            overflow: hidden; 
+        /* メインビジュアル */
+        #main-visual-banner {
+            height: 400px;
+            background-image: url('images/Gemini_Generated_Image_8n89s08n89s08n89.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
-        #main-visual-banner img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            object-position: center 30%; /* 中心からやや上を基準にする */
+        #main-visual-banner h2 {
+            color: var(--white);
+            font-size: 3em;
+            letter-spacing: 2px;
+            border-bottom: none;
+            padding-bottom: 0;
         }
-        
-        /* 注目製品 (Featured Products) */
-        .featured-products { background-color: var(--white); }
-        .featured-product-grid {
+        #main-visual-banner h2::after {
+            display: none;
+        }
+        #main-visual-banner p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        /* ニュースセクション */
+        #news-section {
+            background-color: var(--white);
+            border-bottom: 1px solid #eee;
+        }
+        #news-list {
+            list-style: none;
+            padding: 0;
+        }
+        #news-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
+            font-size: 0.95em;
+        }
+        #news-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* 注目製品セクション */
+        #featured-products {
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+        #featured-product-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
+            flex-wrap: wrap;
             margin-top: 40px;
         }
-        /* 製品カードを<a>タグに変更し、アクセシビリティを確保 */
-        .featured-product-card, .product-card {
-            display: block; /* <a>タグをブロック要素にする */
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #eee;
+        .featured-product-card {
+            display: block;
+            width: 30%;
+            min-width: 250px;
             background-color: var(--white);
-            color: var(--text-color); /* リンクの色をリセット */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
             text-decoration: none;
+            color: var(--text-color);
+            overflow: hidden;
         }
-        .featured-product-card:hover, .product-card:hover {
+        .featured-product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-        .featured-product-card { max-width: 300px; flex: 1; } 
-        .featured-product-card .image-placeholder { height: 200px; display: flex; align-items: center; justify-content: center; padding: 10px; }
-        .featured-product-card img { width: 100%; height: 100%; object-fit: contain; }
-        .featured-product-card h3 { font-size: 1.2em; padding: 15px 10px 5px; margin: 0; color: var(--main-color); }
-        .featured-product-card p { font-size: 0.9em; padding: 0 10px 15px; margin: 0; }
+        .featured-product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .featured-product-card .price {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-top: 5px;
+        }
 
-        /* NEWS/TOPICS */
-        .news-section { background-color: var(--light-bg); border-top: 1px solid #ddd; }
-        #newsList { list-style: none; padding-left: 0; background-color: var(--white); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
-        #newsList li { border-bottom: 1px dashed #ddd; padding: 15px 25px; display: flex; gap: 20px; transition: background-color 0.2s; }
-        #newsList li:hover { background-color: #f7f7f7; cursor: pointer; }
-        #newsList .date { font-weight: bold; color: var(--main-color); flex-shrink: 0; }
+        /* 製品一覧ページ */
+        #products-page {
+            display: none;
+        }
+        .product-filters {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+        }
+        .filter-group label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .filter-group select, .filter-group input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        /* 検索サジェスト */
+        .search-container {
+            position: relative;
+        }
+        #search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            border-top: none;
+            z-index: 50;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        #search-suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        #search-suggestions div:hover {
+            background-color: var(--light-bg);
+        }
 
-        /* PRODUCT CATEGORY NAVIGATOR */
-        .product-nav-container {
+        #product-list-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        .product-card {
+            display: block;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            text-decoration: none;
+            color: var(--text-color);
+            transition: box-shadow 0.3s;
+            overflow: hidden;
+        }
+        .product-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 製品カテゴリナビゲーション (トップページ用) */
+        .product-nav {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 30px;
+            margin: 30px 0;
+            padding: 0 20px;
         }
         .product-nav-item {
-            padding: 15px 30px;
-            border: 2px solid var(--main-color); /* ボーダーを太く */
+            display: block;
+            padding: 10px 20px;
+            border: 2px solid var(--main-color);
             color: var(--main-color);
-            border-radius: 5px;
-            text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s;
-            flex-grow: 1;
-            max-width: 200px;
-            text-align: center;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
         }
         .product-nav-item:hover {
             background-color: var(--main-color);
             color: var(--white);
         }
 
-        /* PRODUCT LIST PAGE */
-        .filter-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 30px;
-            padding: 15px;
-            background-color: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        .filter-controls > div {
-            flex-grow: 1;
-            min-width: 150px;
-        }
-        .filter-controls label, .filter-controls select, .filter-controls input {
-            display: block;
+        /* 企業情報ページ */
+        .company-table {
             width: 100%;
-        }
-        .filter-controls select, .filter-controls input {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-top: 5px;
-        }
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* グリッドレイアウト */
-            gap: 30px;
-        }
-        .product-card {
-            padding: 15px;
-            border: 1px solid #ddd;
-            background-color: var(--white);
-        }
-        .product-card .image-placeholder {
-            height: 200px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
-        .product-card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        .product-card h3 { font-size: 1.3em; color: var(--main-color); }
-        .product-card .price { font-weight: bold; color: var(--accent-color); margin-top: 10px; }
-
-        /* PRODUCT DETAIL PAGE */
-        .product-detail-area img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            border: 1px solid #eee;
-        }
-
-        /* 企業情報 / 採用情報 */
-        .mission-blockquote { 
-            background-color: #e6f0ff; 
-            border-left: 8px solid var(--main-color); 
-            padding: 30px; 
-            margin: 30px 0; 
-            border-radius: 4px;
-        }
-        .company-table { 
-            width: 100%; 
-            border-collapse: collapse; 
+            border-collapse: collapse;
             margin-top: 20px;
             background-color: var(--white);
         }
         .company-table th, .company-table td {
-            padding: 12px 15px;
+            padding: 15px;
             border: 1px solid #ddd;
             text-align: left;
         }
-        .company-table th { 
-            background-color: #f0f8ff; 
+        .company-table th {
             width: 30%;
+            background-color: #f0f0f0;
+            color: var(--corporate-color);
             font-weight: bold;
-            color: var(--main-color);
+        }
+        /* Contact Page (省略) */
+
+        /* モーダル (製品詳細) */
+        #product-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        #product-modal-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #product-modal-content {
+            background-color: var(--white);
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        #product-modal-backdrop.open #product-modal-content {
+            transform: scale(1);
+        }
+        #modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2em;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--sub-text-color);
+        }
+
+        .product-detail-layout {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .detail-image-box {
+            flex: 1;
+            min-width: 300px;
+        }
+        .product-detail-info {
+            flex: 1;
+        }
+        .modal-main-image img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        .modal-thumbnail-gallery {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+        .modal-thumbnail-gallery img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: border-color 0.2s;
+        }
+        .modal-thumbnail-gallery img.active, .modal-thumbnail-gallery img:hover {
+            border-color: var(--accent-color);
+        }
+        .star-rating {
+            color: gold;
+            font-size: 1.2em;
+        }
+        .star-count {
+            color: var(--sub-text-color);
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .color-option {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .color-option:hover, .color-option.active {
+            transform: scale(1.1);
+            border-color: var(--accent-color);
         }
         
+        /* 連絡先フォーム */
+        .contact-form {
+            max-width: 700px;
+            margin: 30px auto;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .contact-form input[type="text"], 
+        .contact-form input[type="email"], 
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        .contact-form button {
+            background-color: var(--main-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #003a73;
+        }
+
+        /* エラーページ */
+        #error-page {
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 50vh;
+        }
+        #error-page h2 {
+            font-size: 4em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        #error-page p {
+            font-size: 1.2em;
+            color: var(--sub-text-color);
+        }
+
+        /* Topへ戻るボタン */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 999;
+        }
+
         /* フッター */
-        footer { 
-            text-align: center; 
-            padding: 25px; 
-            margin-top: 0; 
-            background-color: var(--corporate-color); 
-            color: #fff; 
-            font-size: 0.9em; 
+        footer {
+            background-color: var(--corporate-color);
+            color: var(--white);
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .footer-nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px;
+            display: inline-block;
+            transition: color 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+        .footer-nav a:hover {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--accent-color);
+        }
+        .social-links {
+            margin: 15px 0;
+        }
+        .social-links a {
+            color: var(--white);
+            margin: 0 10px;
+            font-size: 1.5em;
+            text-decoration: none;
         }
 
-        /* === レスポンシブデザインのためのMedia Query === */
-        @media (max-width: 992px) {
-            header { padding: 15px 20px; }
-            nav a { padding: 8px 10px; margin-left: 5px; font-size: 0.9em; }
-            .section-padding { padding: 50px 15px; }
-            .featured-product-grid { flex-wrap: wrap; }
-            .featured-product-card { max-width: 45%; }
-            .product-nav-container { flex-wrap: wrap; }
-            .product-nav-item { max-width: 45%; }
-            .filter-controls { flex-wrap: wrap; }
-            .filter-controls > div { min-width: 100%; margin-bottom: 10px; }
+        /* フォームとインターンセクション専用スタイル */
+        .recruitment-tabs {
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 30px;
+        }
+        .recruitment-tab-btn {
+            padding: 15px 30px;
+            cursor: pointer;
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            border-bottom: none;
+            margin-bottom: -2px;
+            font-weight: bold;
+            color: var(--sub-text-color);
+            transition: background-color 0.3s;
+        }
+        .recruitment-tab-btn.active {
+            background-color: var(--light-bg);
+            border-color: var(--ddd);
+            border-bottom: 2px solid var(--light-bg);
+            color: var(--main-color);
         }
 
-        @media (max-width: 600px) {
-            header { 
-                flex-direction: column; 
-                align-items: flex-start;
+        .intern-program-box {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+
+        /* フォーム共通スタイル */
+        .form-section {
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 20px;
+            background-color: var(--light-bg);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+        .form-group input:not([type="radio"]) { /* ラジオボタン以外 */
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .radio-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+        .radio-group input[type="radio"] {
+            width: auto; 
+            margin-right: 10px;
+            box-sizing: content-box; /* ラジオボタンのサイズを保持 */
+        }
+        .required::after {
+            content: " 必須";
+            color: red;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+        .form-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .form-actions button, .form-actions a.btn-primary {
+            padding: 12px 25px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            text-decoration: none; /* aタグ用 */
+            display: inline-block;
+        }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+        .btn-secondary {
+            background-color: #ccc;
+            color: var(--corporate-color);
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* 確認画面テーブル */
+        .confirm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .confirm-table th, .confirm-table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .confirm-table th {
+            width: 30%;
+            background-color: #f0f8ff; /* 確認画面用の薄い背景色 */
+            color: var(--main-color);
+            font-weight: bold;
+        }
+        .confirm-table td {
+            background-color: var(--white);
+            word-break: break-all;
+        }
+
+        /* 完了画面 */
+        #completion-message {
+            text-align: center;
+            padding: 50px;
+            background-color: #e6ffe6; /* 薄い緑色 */
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            font-size: 1.2em;
+            color: #1e7e34;
+        }
+
+        /* レスポンシブデザイン (簡易版) */
+        @media (max-width: 800px) {
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
             }
             nav {
                 margin-top: 10px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                width: 100%;
             }
-            nav a { margin: 0; flex-grow: 1; text-align: center; }
-            h2 { font-size: 1.7em; }
-            #main-visual-banner { height: 300px; }
-            .featured-product-card { max-width: 100%; }
-            .product-nav-item { max-width: 100%; }
-            .product-list { grid-template-columns: 1fr; }
-            .product-detail-area { flex-direction: column; }
-            .detail-image-box { max-width: 100% !important; } /* モバイルで画像を全幅に */
+            nav a {
+                padding: 5px 10px;
+            }
+            .section-padding {
+                padding: 40px 15px;
+            }
+            .product-detail-layout {
+                flex-direction: column;
+            }
+            #product-modal-content {
+                width: 95%;
+            }
+            .featured-product-card {
+                width: 100%;
+                min-width: unset;
+            }
+            .product-filters {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .filter-group {
+                width: 48%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -313,230 +707,406 @@
             </a>
         </div>
         <nav>
-            <a id="nav-products" data-page="products" href="#products">PRODUCTS</a> 
-            <a id="nav-news" data-page="index" href="#news" onclick="document.getElementById('news-anchor').scrollIntoView({ behavior: 'smooth' }); return false;">NEWS / TOPICS</a>
-            <a id="nav-company" data-page="company" href="#company">CORPORATE</a> 
-            <a id="nav-recruitment" data-page="recruitment" href="#recruitment">RECRUITMENT</a> 
-            <a id="nav-contact" data-page="contact" href="#contact">CONTACT</a>
+            <a id="nav-products" data-page="products" href="#products" aria-current="false">PRODUCTS</a> 
+            <a id="nav-news" data-page="index" href="#news" aria-current="false">NEWS / TOPICS</a>
+            <a id="nav-company" data-page="company" href="#company" aria-current="false">CORPORATE</a> 
+            <a id="nav-recruitment" data-page="recruitment" href="#recruitment" aria-current="false">RECRUITMENT</a> 
+            <a id="nav-contact" data-page="contact" href="#contact" aria-current="false">CONTACT</a>
         </nav>
     </header>
 
     <div id="page-container" class="content">
 
-        <div id="index-page">
-            
+        <div id="index-page" style="display: block;">
             <div id="main-visual-banner">
-                <img src="images/Gemini_Generated_Image_ehhzqmehhzqmehhz.jpg" alt="ぺんとるの文房具コレクション">
+                <div style="text-align: center;">
+                    <h2>「書く」「消す」の未来をデザインする</h2>
+                    <p>創造性を刺激する、革新的な文具を。</p>
+                </div>
+            </div>
+
+            <div id="news-section" class="section-padding" style="padding-top: 40px; padding-bottom: 40px;">
+                <a id="news-anchor" style="display: block; visibility: hidden; position: relative; top: -80px;"></a>
+                <h3 style="text-align: center; color: var(--corporate-color); margin-bottom: 20px;">NEWS / TOPICS</h3>
+                <ul id="newsList">
+                    </ul>
             </div>
             
-            <section class="featured-products section-padding">
-                <h2>FEATURED PRODUCTS / 注目製品</h2>
-                <p style="color: var(--main-color); font-weight: bold; margin-bottom: 40px; text-align: center;">いま「ぺんとる」が最もおすすめする革新的な文具たち</p>
-                <div class="featured-product-grid" id="featured-product-container">
-                </div>
-                <div class="view-all-link" style="margin-top: 40px;">
-                    <a href="#" onclick="showPage('products'); return false;" style="color: var(--main-color); text-decoration: none;">全製品を見る &gt;</a>
-                </div>
-            </section>
+            <div class="product-nav">
+                <a href="#" class="product-nav-item" data-category-link="pen">🖊️ 筆記具</a>
+                <a href="#" class="product-nav-item" data-category-link="eraser">🧽 消しゴム</a>
+                <a href="#" class="product-nav-item" data-category-link="paper">🗒️ 紙製品</a>
+            </div>
 
+            <div id="featured-products" class="section-padding">
+                <h2>FEATURED PRODUCTS</h2>
+                <p>今、最も注目されているぺんとるのベストセラー製品</p>
+                <div id="featured-product-container">
+                    </div>
+            </div>
 
-            <section class="news-section section-padding">
-                <h2 id="news-anchor">NEWS / TOPICS</h2>
-                <ul id="newsList"></ul>
-                <div class="view-all-link">
-                    <a href="#" onclick="alert('ニュース一覧ページへ遷移します'); return false;" style="color: var(--main-color); text-decoration: none;">最新情報をもっと見る &gt;</a>
-                </div>
-            </section>
-            
-            <section class="product-nav-section section-padding">
-                <h2>PRODUCT CATEGORY / 製品カテゴリ</h2>
-                <p style="font-size: 1.1em; color: var(--sub-text-color); text-align: center;">用途やお好みに合わせて、製品カテゴリからお探しいただけます。</p>
-                <div class="product-nav-container">
-                    <a href="#pen" class="product-nav-item" data-category-link="pen">🖋️ 筆記具</a>
-                    <a href="#eraser" class="product-nav-item" data-category-link="eraser">🧼 消す・修正</a>
-                    <a href="#paper" class="product-nav-item" data-category-link="paper">📒 紙製品・ノート</a>
-                </div>
-            </section>
-            
-            <section class="corporate-highlight-section section-padding">
-                <h2>CORPORATE / 企業情報</h2>
-                <p>ぺんとるは「**素材に挑み、未来を描く**」を理念とし、使いやすさと革新を追求した文房具製品を開発・製造しています。</p>
-                <a href="#" onclick="showPage('company'); return false;" style="color: var(--main-color); font-weight: bold; text-decoration: none;">会社概要・沿革を見る &gt;</a>
-            </section>
-
+            <div class="section-padding" style="text-align: center;">
+                <h2>CORPORATE PHILOSOPHY</h2>
+                <p style="font-size: 1.2em; color: var(--main-color); margin-bottom: 30px;">「素材に挑み、未来を描く」</p>
+                <a href="#company" onclick="showPage('company'); return false;" class="product-nav-item" style="background-color: var(--accent-color); color: var(--white); border-color: var(--accent-color);">企業情報を見る</a>
+            </div>
         </div>
 
-        <div id="products-page" style="display:none;" class="section-padding" >
-            <h2>PRODUCTS / 商品ラインナップ</h2>
-            <p>ぺんとるが誇る高品質な文房具の数々をご紹介します。用途やカテゴリに応じてお探しください。</p>
-
-            <div class="filter-controls">
-                <div>
-                    <label for="category-filter">カテゴリで絞り込む:</label>
+        <div id="products-page" style="display:none;" class="section-padding">
+            <h2>PRODUCTS / 製品一覧</h2>
+            
+            <div class="product-filters">
+                <div class="filter-group">
+                    <label for="category-filter">カテゴリ</label>
                     <select id="category-filter">
-                        <option value="all">すべての商品</option>
-                        <option value="pen">筆記具（ペン・マーカー）</option>
-                        <option value="eraser">消す・修正</option>
-                        <option value="paper">紙製品・ノート</option>
+                        <option value="all">すべて</option>
+                        <option value="pen">筆記具</option>
+                        <option value="eraser">消しゴム</option>
+                        <option value="paper">紙製品</option>
                     </select>
                 </div>
-                <div>
-                    <label for="sort-select">並べ替え:</label>
+                <div class="filter-group">
+                    <label for="price-filter">価格帯</label>
+                    <select id="price-filter">
+                        <option value="all">すべて</option>
+                        <option value="low">~ ¥300</option>
+                        <option value="mid">¥301 ~ ¥600</option>
+                        <option value="high">¥601 ~</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-select">並び替え</label>
                     <select id="sort-select">
                         <option value="default">おすすめ順</option>
                         <option value="price-asc">価格の安い順</option>
                         <option value="price-desc">価格の高い順</option>
                     </select>
                 </div>
-                <div>
-                    <label for="search-box">キーワード検索:</label>
-                    <input type="text" id="search-box" placeholder="例: ジェルペン、エコ">
+                <div class="filter-group search-container" style="flex-grow: 1; max-width: 300px;">
+                    <label for="search-box">キーワード検索</label>
+                    <input type="text" id="search-box" placeholder="製品名、タグなど">
+                    <div id="search-suggestions"></div>
                 </div>
             </div>
 
-            <div class="product-list" id="product-list-container">
-            </div>
+            <div id="product-list-container">
+                </div>
         </div>
 
-        <div id="product-detail-page" style="display:none;" class="section-padding"></div>
-
         <div id="company-page" style="display:none;" class="section-padding">
-            <h2>CORPORATE / 企業情報・理念</h2>
-            <div class="mission-blockquote">
-                <p>企業理念： 「素材に挑み、未来を描く」</p>
-                <p><strong>ミッション（果たすべき使命）</strong>： 私たちは、文具の素材と精密技術の限界に挑み、ユーザーの想像を超える新しい価値を創造し続けます。シャーペン、ボールペン、消しゴムの核心技術を磨き、「書く」「消す」行為の未来をデザインすることで、社会の発展に貢献します。</p>
-            </div>
-
-            <h3>会社概要</h3>
+            <h2>CORPORATE / 企業情報</h2>
+            
+            <h3>企業理念</h3>
+            <p>「素材に挑み、未来を描く」<br>私たちは、筆記具と紙製品の素材の可能性を追求し、人々の創造性と学習活動を支える革新的な製品を提供し続けます。</p>
+            
+            <h3 style="margin-top: 40px;">会社概要</h3>
             <table class="company-table">
-                <tr><th>会社名</th><td>ぺんとる</td></tr>
-                <tr><th>社長名</th><td>水原 光葵</td></tr>
-                <tr><th>業種</th><td>文具メーカー</td></tr>
-                <tr><th>主たる業務</th><td>各種文房具の自社ブランド製品開発</td></tr>
-                <tr><th>創業</th><td>2005年3月</td></tr>
-                <tr><th>資本金</th><td>1000万円</td></tr>
-                <tr><th>年商</th><td>10億円</td></tr>
-                <tr><th>規模（従業員数）</th><td>正社員300名</td></tr>
-                <tr><th>支社（支店）数等</th><td>本社・平塚工場</td></tr>
+                <tr><th>会社名</th><td>株式会社ぺんとる</td></tr>
+                <tr><th>設立</th><td>2005年11月1日</td></tr>
+                <tr><th>資本金</th><td>3億円</td></tr>
+                <tr><th>所在地</th><td>神奈川県平塚市北金目１－８８－１２</td></tr>
+                <tr><th>事業内容</th><td>筆記具、消しゴム、紙製品の企画、製造、販売</td></tr>
+                <tr><th>従業員数</th><td>150名（2025年10月時点）</td></tr>
             </table>
+
+            <h3 style="margin-top: 40px;">沿革</h3>
+            <ul>
+                <li>2005年11月: 株式会社ぺんとる設立。</li>
+                <li>2010年4月: 低粘度インク技術「ジェットライド」開発。</li>
+                <li>2015年9月: エコマーク認定製品「木軸ボールペン エコ」発売。</li>
+                <li>2025年11月: 公式ウェブサイトをリニューアル。</li>
+            </ul>
         </div>
 
         <div id="recruitment-page" style="display:none;" class="section-padding">
             <h2>RECRUITMENT / 採用情報</h2>
-            <p>ぺんとるでは、文具の未来を共に創造する熱意ある仲間を求めています。詳細な募集要項は、別途採用特設サイトをご確認ください。</p>
+            
+            <div class="recruitment-tabs">
+                <button id="tab-btn-intern" class="recruitment-tab-btn" data-tab="intern" onclick="showRecruitmentTab('intern')">インターンシップ情報</button>
+                <button id="tab-btn-recruit" class="recruitment-tab-btn" data-tab="recruit" onclick="showRecruitmentTab('recruit')">採用情報（新卒・キャリア）</button>
+            </div>
 
-            <h3>募集要項（総合職抜粋）</h3>
-            <table class="company-table">
-                <tr><th>募集職種</th><td>総合職（事務、営業、技術）</td></tr>
-                <tr><th>応募資格</th><td>2026年大学卒業見込みまたは大学院修了見込みの方</td></tr>
-                <tr><th>初任給</th><td>大学院修了：231,900円 / 大学卒：221,100円</td></tr>
-                <tr><th>勤務地</th><td>神奈川県平塚市北金目１－８８－１２</td></tr>
-                <tr><th>休日休暇</th><td>年間休日124日（土日、祝日、年末年始休暇、慶弔休暇、有給休暇 他）</td></tr>
-            </table>
-            <p style="text-align: right; margin-top: 30px;"><a href="#" onclick="showPage('contact'); return false;" style="color: var(--accent-color); font-weight: bold;">採用に関するお問い合わせはこちら &gt;</a></p>
+            <div id="intern-info" class="recruitment-content" style="display:none;">
+                <h3 style="color: var(--accent-color); text-align: center;">2 Days Challenge: 商品開発シミュレーション</h3>
+                <p style="text-align: center;">ぺんとるの核心業務である「商品開発」を体験する実践的なグループワークです。社員からの丁寧なフィードバックを受け、提案をブラッシュアップするプロセスを経験できます。</p>
+
+                <div class="intern-program-box">
+                    <h4 style="color: var(--main-color); margin-top: 0;">プログラム詳細</h4>
+                    <table class="company-table" style="width: 100%; border-collapse: collapse;">
+                        <tr style="background-color: #f0f0f0;"><th>形式</th><td>2dayのグループワーク（オンライン開催）</td></tr>
+                        <tr><th>内容</th><td>商品開発の模擬体験と商品評価<br>・1日目：商品提案とそのフィードバック<br>・2日目：フィードバックからブラッシュアップした商品提案</td></tr>
+                        <tr style="background-color: #f0f0f0;"><th>フィードバック</th><td>社員からの個別フィードバックあり</td></tr>
+                        <tr><th>日時</th><td>12月15日～16日、12月22日～23日<br>（以降の開催日は、決定次第追加予定）</td></tr>
+                    </table>
+                    
+                    <h4 style="color: var(--main-color); margin-top: 30px;">申し込みフォーム</h4>
+                    <div id="intern-form-wrapper" class="form-section">
+                        </div>
+                </div>
+            </div>
+
+            <div id="recruit-info" class="recruitment-content" style="display:none;">
+                <p>ぺんとるでは、文具の未来を共に創造する熱意ある仲間を求めています。詳細な募集要項は、別途採用特設サイトをご確認ください。</p>
+
+                <h3 style="color: var(--corporate-color);">募集要項（総合職抜粋）</h3>
+                <table class="company-table" style="width: 100%; border-collapse: collapse;">
+                    <tr style="background-color: #f0f0f0;"><th>募集職種</th><td>総合職（事務、営業、技術）</td></tr>
+                    <tr><th>応募資格</th><td>2026年大学卒業見込みまたは大学院修了見込みの方</td></tr>
+                    <tr style="background-color: #f0f0f0;"><th>初任給</th><td>大学院修了：231,900円 / 大学卒：221,100円</td></tr>
+                    <tr><th>勤務地</th><td>神奈川県平塚市北金目１－８８－１２</td></tr>
+                    <tr style="background-color: #f0f0f0;"><th>休日休暇</th><td>年間休日124日（土日、祝日、年末年始休暇、慶弔休暇、有給休暇 他）</td></tr>
+                </table>
+                <p style="text-align: right; margin-top: 30px;"><a href="#contact" onclick="showPage('contact'); return false;" style="color: var(--accent-color); font-weight: bold;">採用に関するお問い合わせはこちら &gt;</a></p>
+            </div>
         </div>
 
         <div id="contact-page" style="display:none;" class="section-padding">
             <h2>CONTACT / お問い合わせ</h2>
-            <p>当社へのお問い合わせは、こちらのフォームをご利用ください。（フォームの実装は省略）</p>
-            <p>製品に関するお問い合わせ、企業に関するお問い合わせ、採用に関するお問い合わせなど、窓口が分かれておりますのでご注意ください。</p>
+            <p style="text-align: center;">製品、企業情報、採用に関するお問い合わせは、以下のフォームよりご連絡ください。担当者より折り返しご連絡いたします。</p>
+            
+            <form class="contact-form" onsubmit="alert('お問い合わせを送信しました。折り返しご連絡いたします。'); this.reset(); return false;">
+                <label for="contact-name">お名前 (必須)</label>
+                <input type="text" id="contact-name" name="contact-name" required>
+
+                <label for="contact-email">メールアドレス (必須)</label>
+                <input type="email" id="contact-email" name="contact-email" required>
+
+                <label for="contact-type">お問い合わせ種別 (必須)</label>
+                <select id="contact-type" name="contact-type" required>
+                    <option value="">選択してください</option>
+                    <option value="product">製品について</option>
+                    <option value="corporate">企業情報・IRについて</option>
+                    <option value="recruitment">採用について</option>
+                    <option value="other">その他</option>
+                </select>
+
+                <label for="contact-message">お問い合わせ内容 (必須)</label>
+                <textarea id="contact-message" name="contact-message" required></textarea>
+
+                <button type="submit">送信する</button>
+            </form>
+        </div>
+
+        <div id="error-page" style="display:none;">
+            <h2>404</h2>
+            <p>お探しのページは見つかりませんでした。</p>
+            <p>URLが正しいかご確認いただくか、<a href="#index" onclick="showPage('index'); return false;" style="color: var(--accent-color);">トップページ</a>へお戻りください。</p>
         </div>
         
     </div>
+    
+    <button id="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
+
+    <div id="product-modal-backdrop" aria-hidden="true" role="dialog">
+        <div id="product-modal-content" role="document">
+            <button id="modal-close-btn" aria-label="モーダルを閉じる">&times;</button>
+            <h2 id="modal-product-name" style="text-align: left;"></h2>
+            
+            <div id="modal-detail-area" class="product-detail-layout">
+                </div>
+        </div>
+    </div>
 
     <footer>
+        <div class="footer-nav">
+            <a href="#index" onclick="showPage('index'); return false;">TOP</a>
+            <a href="#products" onclick="showPage('products'); return false;">PRODUCTS</a>
+            <a href="#company" onclick="showPage('company'); return false;">CORPORATE</a>
+            <a href="#recruitment" onclick="showPage('recruitment'); showRecruitmentTab('intern'); return false;">INTERN</a>
+            <a href="#contact" onclick="showPage('contact'); return false;">CONTACT</a>
+            <a href="#" onclick="alert('プライバシーポリシーへ遷移します'); return false;">プライバシーポリシー</a>
+            <a href="#" onclick="alert('利用規約へ遷移します'); return false;">利用規約</a>
+        </div>
+        <div class="social-links">
+            <a href="#" aria-label="Twitter" style="font-family: Arial, sans-serif;">T</a> 
+            <a href="#" aria-label="Instagram" style="font-family: Arial, sans-serif;">I</a>
+            <a href="#" aria-label="YouTube" style="font-family: Arial, sans-serif;">Y</a>
+        </div>
         <p>Copyright © 2005-2025 Pentol All Rights Reserved.</p>
     </footer>
 
     <script>
-        // ニュースと新製品情報は既存のものを流用
+        // === 1. 初期データと定数 ===
         const news = [
             { date: "2025.11.27", text: "サイトを全面リニューアルしました。" },
             { date: "2025.11.20", text: "製品情報ページにカテゴリ別フィルタ機能を追加しました。" },
             { date: "2025.11.10", text: "年末年始の休業のお知らせ。" },
             { date: "2025.10.01", text: "2026年新卒採用の二次募集を開始しました。" }
         ];
-
-        // 商品詳細データ (画像パスは images/ フォルダ前提)
+        
+        // 商品詳細データ
         const productDetails = {
             "Z1": {
                 id: "Z1", name: "スーパージェルペン Z1",
                 description: "当社の技術の粋を集めたフラッグシップモデル。低粘度ゲルインクを採用し、圧倒的になめらかな書き味を実現しました。", price: 450, priceDisplay: "¥450 (税込)",
-                features: ["インク色: 黒, 赤, 青", "ボール径: 0.5mm/0.7mm", "替芯: R-Z1"], category: "pen",
-                imageSrc: "images/images.jpg", imageAlt: "スーパージェルペン Z1の画像"
+                features: ["インク色: 黒, 赤, 青", "ボール径: 0.5mm/0.7mm", "替芯: R-Z1"], category: "pen", tags: ["ジェル", "速乾", "フラッグシップ", "0.5mm"],
+                images: ["images/images.jpg", "images/z1_detail_grip.jpg", "images/z1_detail_tip.jpg"], 
+                colorOptions: [{name: "黒", code: "#333"}, {name: "赤", code: "red"}, {name: "青", code: "blue"}], 
+                rating: 4.8, reviewCount: 258,
+                seoDesc: "なめらかな書き味のフラッグシップジェルペン Z1。低粘度ゲルインクの最高の体験をお試しください。"
             },
             "Eraser1": {
                 id: "Eraser1", name: "軽く消せる消しゴム",
                 description: "独自の配合により、消字性が向上。力を入れなくても軽くきれいに消せ、消しクズがまとまりやすいのが特徴です。", price: 120, priceDisplay: "¥120 (税込)",
-                features: ["サイズ: 55x22x10mm", "素材: エコポリマー", "カラー: 白, 黒"], category: "eraser",
-                imageSrc: "images/images_eraser.jpg", imageAlt: "軽く消せる消しゴムの画像"
+                features: ["サイズ: 55x22x10mm", "素材: エコポリマー", "カラー: 白, 黒"], category: "eraser", tags: ["定番", "消字性", "まとまる", "エコ"],
+                images: ["images/images_eraser.jpg", "images/eraser1_detail_size.jpg"],
+                rating: 4.5, reviewCount: 190,
+                seoDesc: "軽く消せる消しゴム Eraser1。力を入れずにきれいに消せて、学習や仕事に最適です。"
             },
             "MP1": {
                 id: "MP1", name: "自動芯出しシャープペン",
                 description: "ノック一回で書き始め、芯が短くなると自動で繰り出される機構を搭載。集中力を途切れさせません。", price: 800, priceDisplay: "¥800 (税込)",
-                features: ["芯径: 0.5mm", "機構: 自動芯出し", "素材: 金属製グリップ", "カラー: 5色展開"], category: "pen",
-                imageSrc: "images/Gemini_Generated_Image_iny88biny88biny88.jpg", imageAlt: "自動芯出しシャープペンの画像"
+                features: ["芯径: 0.5mm", "機構: 自動芯出し", "素材: 金属製グリップ", "カラー: 5色展開"], category: "pen", tags: ["シャーペン", "金属", "プロ仕様", "自動"],
+                images: ["images/Gemini_Generated_Image_iny88biny88biny88.jpg", "images/mp1_detail_mechanism.jpg", "images/mp1_detail_colors.jpg"],
+                colorOptions: [{name: "ブラック", code: "#000"}, {name: "シルバー", code: "#ccc"}, {name: "ブルー", code: "#007bff"}],
+                rating: 4.9, reviewCount: 88,
+                seoDesc: "自動芯出しシャープペン MP1。革新的な機構で、途切れることのない集中した筆記を実現。"
             },
             "NoteA5": {
                 id: "NoteA5", name: "学習用A5ノート",
                 description: "学生の声を取り入れ開発された、学習に最適なA5サイズのノート。裏写りしにくいオリジナル用紙を使用しています。", price: 350, priceDisplay: "¥350 (税込)",
-                features: ["サイズ: A5", "罫線: 7mm B罫", "枚数: 40枚", "特長: 裏写り防止用紙"], category: "paper",
-                imageSrc: "images/Gemini_Generated_Image_lxh9uulxh9uulxh9.jpg", imageAlt: "学習用A5ノートの画像"
+                features: ["サイズ: A5", "罫線: 7mm B罫", "枚数: 40枚", "特長: 裏写り防止用紙"], category: "paper", tags: ["ノート", "学習", "A5", "裏写り防止"],
+                images: ["images/Gemini_Generated_Image_lxh9uulxh9uulxh9.jpg", "images/notea5_detail_paper.jpg"],
+                rating: 4.2, reviewCount: 302,
+                seoDesc: "学習に最適なA5ノート。裏写りしにくい高品質なぺんとるオリジナル用紙を使用。"
             },
             "EcoPen": {
                 id: "EcoPen", name: "木軸ボールペン エコ",
                 description: "再生木材を使用した、環境に配慮したノック式ボールペン。落ち着いたデザインでビジネスシーンにも最適です。", price: 500, priceDisplay: "¥500 (税込)",
-                features: ["インク色: 黒", "ボール径: 0.7mm", "素材: 再生木材", "替芯: R-B07"], category: "pen",
-                imageSrc: "images/EcoPen.jpg", imageAlt: "木軸ボールペン エコの画像"
+                features: ["インク色: 黒", "ボール径: 0.7mm", "素材: 再生木材", "替芯: R-B07"], category: "pen", tags: ["ボールペン", "エコ", "ビジネス", "木軸"],
+                images: ["images/EcoPen.jpg", "images/ecopen_detail_material.jpg"],
+                rating: 4.6, reviewCount: 95,
+                seoDesc: "再生木材を使用したエコな木軸ボールペン。環境に配慮しながら上質な書き心地を提供。"
             }
         };
 
-        const pages = {
-            'index': document.getElementById('index-page'),
-            'products': document.getElementById('products-page'),
-            'company': document.getElementById('company-page'),
-            'recruitment': document.getElementById('recruitment-page'), 
-            'contact': document.getElementById('contact-page'),
-            'detail': document.getElementById('product-detail-page'), 
+        // DOMContentLoaded時に確実に要素を取得するように変更
+        let pages, navLinks, modalBackdrop;
+
+        // ページごとのSEO情報
+        const seoData = {
+            'index': { title: 'ぺんとる - 「書く」「消す」の未来をデザインする文具メーカー', desc: 'ぺんとる公式サイト。革新的な筆記具、消しゴム、紙製品のラインナップをご紹介します。' },
+            'products': { title: '製品一覧 | ぺんとる', desc: 'ぺんとるの全製品ラインナップ。カテゴリや価格帯で検索して最適な文具を見つけてください。' },
+            'company': { title: '企業情報 | ぺんとる', desc: 'ぺんとるの企業理念、会社概要、ミッション。素材に挑み、未来を描く。' },
+            'recruitment': { title: '採用情報・インターンシップ | ぺんとる', desc: 'ぺんとる採用情報。新卒採用とインターンシップ情報を掲載しています。' },
+            'contact': { title: 'お問い合わせ | ぺんとる', desc: '製品、企業、採用に関するお問い合わせ窓口。' },
+            'error': { title: '404 ページが見つかりません | ぺんとる', desc: 'お探しのページは見つかりませんでした。' }
         };
-        const navLinks = document.querySelectorAll('header nav a');
+
+        // インターンフォームデータとステップ管理
+        let internFormData = {};
+        
+        // **【修正点 1】日程選択フィールドを追加**
+        const formFields = [
+            { id: 'name', label: '氏名', required: true },
+            { id: 'university', label: '大学名', required: true },
+            { id: 'department', label: '学部学科名', required: true },
+            { 
+                id: 'schedule', 
+                label: '参加希望日程', 
+                required: true, 
+                type: 'radio', 
+                options: [
+                    // **[画像からの日時を反映]**
+                    { value: '20251215-16', label: '12月15日(月)～16日(火)' },
+                    { value: '20251222-23', label: '12月22日(月)～23日(火)' }
+                ]
+            },
+            { id: 'email', label: 'メールアドレス', type: 'email', required: true },
+            { id: 'phone', label: '電話番号', type: 'tel', required: true },
+            { id: 'address', label: '住所', required: true }
+        ];
+        
+        // === 2. ページ・ナビゲーション制御 ===
         
         /**
-         * ページを切り替えるメイン関数 (History API対応)
-         * @param {string} pageId - 表示するページID
-         * @param {string|null} productId - 詳細ページの場合の商品ID
-         * @param {boolean} skipHistory - 履歴の変更をスキップするか
+         * SEO情報を更新する
+         */
+        function updateSeo(pageId, detail = null) {
+            const data = detail || seoData[pageId] || seoData['index'];
+            const titleElement = document.getElementById('page-title');
+            const descElement = document.getElementById('page-description');
+            if (titleElement) titleElement.textContent = data.title;
+            if (descElement) descElement.setAttribute('content', data.desc);
+        }
+
+        /**
+         * ページを切り替えるメイン関数
          */
         function showPage(pageId, productId = null, skipHistory = false) {
-            Object.values(pages).forEach(page => page.style.display = 'none');
-            navLinks.forEach(link => link.classList.remove('active'));
+            if (!pages) {
+                 console.error('Pages object is not initialized. Cannot show page.');
+                 return;
+            }
 
-            let stateUrl = '#index'; 
-            let activePageId = pageId;
-
-            if (pageId === 'detail' && productId) {
-                pages['detail'].style.display = 'block';
-                renderProductDetail(productId);
-                document.querySelector(`[data-page="products"]`).classList.add('active'); 
-                stateUrl = `#products/${productId}`;
-                activePageId = 'products';
-            } else if (pages[pageId]) {
-                pages[pageId].style.display = 'block';
-                const activeLink = document.querySelector(`[data-page="${activePageId}"]`);
-                if (activeLink) activeLink.classList.add('active');
-                stateUrl = `#${pageId}`;
+            if (!pages[pageId]) {
+                pageId = 'error';
             }
             
-            // History APIでURLと履歴を更新
+            Object.values(pages).forEach(page => { if(page) page.style.display = 'none'; });
+            if (pages[pageId]) {
+                pages[pageId].style.display = 'block';
+            }
+
+            if (navLinks) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    link.setAttribute('aria-current', 'false');
+                });
+                const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    activeLink.setAttribute('aria-current', 'page');
+                } else if (pageId === 'index') {
+                     const indexLink = document.querySelector(`[data-page="index"]`);
+                     if (indexLink) indexLink.classList.add('active');
+                }
+            }
+
+            updateSeo(pageId);
+
+            let stateUrl = `#${pageId}`;
             if (!skipHistory) {
                 window.history.pushState({ page: pageId, product: productId }, '', stateUrl);
             }
 
             if (pageId === 'products') {
                  filterAndSortProducts();
+            } else if (pageId === 'recruitment') {
+                const hashPart = window.location.hash.split('/')[1];
+                showRecruitmentTab(hashPart || 'intern', true);
             }
             window.scrollTo(0, 0); 
         }
+
+        /**
+         * URLハッシュに基づいてページをロードする関数
+         */
+        function loadPageFromHash() {
+            const hash = window.location.hash || '#index';
+            const parts = hash.substring(1).split('/');
+            let pageId = parts[0];
+            const productId = parts[1] || null;
+
+            if (pageId === 'news') {
+                showPage('index', null, true);
+                setTimeout(() => { 
+                    const newsAnchor = document.getElementById('news-anchor');
+                    if (newsAnchor) {
+                        newsAnchor.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 100); 
+            } else if (pageId === 'products' && productId) {
+                showPage('products', null, true);
+                openProductModal(productId);
+            } else if (pageId === 'recruitment') {
+                showPage(pageId, null, true);
+            } else {
+                showPage(pageId, null, true);
+            }
+        }
+        
+        // === 3. 製品リストとフィルタリング ===
 
         /**
          * 注目製品をトップページにレンダリングする関数
@@ -544,32 +1114,34 @@
         function renderFeaturedProducts() {
             const container = document.getElementById('featured-product-container');
             if (!container) return; 
-
             container.innerHTML = '';
             
-            // 注目製品として、Z1, Eraser1, MP1を選ぶ
             const featuredIds = ["Z1", "Eraser1", "MP1"]; 
 
             featuredIds.forEach(id => {
                 const detail = productDetails[id];
                 if (!detail) return;
 
-                // divからaタグに変更
                 const card = document.createElement('a'); 
                 card.className = 'featured-product-card';
-                card.href = `#products/${detail.id}`; // リンク先を設定
+                card.href = `#products/${detail.id}`; 
                 
                 card.addEventListener('click', (e) => {
                     e.preventDefault();
-                    showPage('detail', detail.id);
+                    openProductModal(detail.id); 
                 });
 
+                const imageSrc = detail.images[0] || 'placeholder.png';
+                
                 card.innerHTML = `
                     <div class="image-placeholder">
-                        <img src="${detail.imageSrc}" alt="${detail.imageAlt}" onerror="this.src='placeholder.png';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.8em;\\'>画像エラー</div>'">
+                        <img src="${imageSrc}" alt="${detail.name}の画像" loading="lazy" onerror="this.src='placeholder.png';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.8em;\\'>画像エラー</div>'">
                     </div>
-                    <h3>${detail.name}</h3>
-                    <p>${detail.description.substring(0, 30)}...</p>
+                    <div style="padding: 15px;">
+                        <h3>${detail.name}</h3>
+                        <p style="font-size: 0.9em; color: var(--sub-text-color);">${detail.description.substring(0, 30)}...</p>
+                        <p class="price">${detail.priceDisplay}</p>
+                    </div>
                 `;
                 container.appendChild(card);
             });
@@ -578,6 +1150,7 @@
         // 商品一覧をレンダリングする関数
         function renderProductList(products) {
             const container = document.getElementById('product-list-container');
+            if (!container) return; 
             container.innerHTML = ''; 
 
             if (products.length === 0) {
@@ -586,25 +1159,26 @@
             }
 
             products.forEach(detail => {
-                // divからaタグに変更
                 const card = document.createElement('a'); 
                 card.className = 'product-card';
-                card.href = `#products/${detail.id}`; // リンク先を設定
-                card.setAttribute('data-category', detail.category);
-                card.setAttribute('data-price', detail.price);
+                card.href = `#products/${detail.id}`; 
                 
                 card.addEventListener('click', (e) => {
                     e.preventDefault();
-                    showPage('detail', detail.id);
+                    openProductModal(detail.id); 
                 });
+
+                const imageSrc = detail.images[0] || 'placeholder.png';
                 
                 card.innerHTML = `
                     <div class="image-placeholder">
-                        <img src="${detail.imageSrc}" alt="${detail.imageAlt}" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.9em;\\'>画像エラー</div>'">
+                        <img src="${imageSrc}" alt="${detail.name}の画像" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.9em;\\'>画像エラー</div>'">
                     </div>
-                    <h3>${detail.name}</h3>
-                    <p>${detail.description.substring(0, 45)}...</p>
-                    <p class="price">${detail.priceDisplay}</p>
+                    <div style="padding: 15px;">
+                        <h3>${detail.name}</h3>
+                        <p style="font-size: 0.9em; color: var(--sub-text-color);">${detail.description.substring(0, 45)}...</p>
+                        <p class="price">${detail.priceDisplay}</p>
+                    </div>
                 `;
                 container.appendChild(card);
             });
@@ -612,20 +1186,40 @@
 
         // フィルタリングとソートを実行する関数
         function filterAndSortProducts() {
-            const category = document.getElementById('category-filter').value;
-            const sortBy = document.getElementById('sort-select').value;
-            const searchKeyword = document.getElementById('search-box').value.toLowerCase();
+            const categoryFilter = document.getElementById('category-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const sortSelect = document.getElementById('sort-select');
+            const searchBox = document.getElementById('search-box');
+            
+            if (!categoryFilter || !priceFilter || !sortSelect || !searchBox) return;
+
+            const category = categoryFilter.value;
+            const priceRange = priceFilter.value;
+            const sortBy = sortSelect.value;
+            const searchKeyword = searchBox.value.toLowerCase();
 
             let productsArray = Object.values(productDetails);
 
-            // 1. フィルタリング
             let filteredProducts = productsArray.filter(p => {
                 const categoryMatch = category === 'all' || p.category === category;
-                const keywordMatch = p.name.toLowerCase().includes(searchKeyword) || p.description.toLowerCase().includes(searchKeyword);
-                return categoryMatch && keywordMatch;
+                
+                const priceMatch = (function() {
+                    const price = p.price;
+                    if (priceRange === 'all') return true;
+                    if (priceRange === 'low') return price <= 300;
+                    if (priceRange === 'mid') return price >= 301 && price <= 600;
+                    if (priceRange === 'high') return price >= 601;
+                    return true;
+                })();
+
+                const keywordMatch = 
+                    p.name.toLowerCase().includes(searchKeyword) || 
+                    p.description.toLowerCase().includes(searchKeyword) ||
+                    p.tags.join(' ').toLowerCase().includes(searchKeyword);
+                    
+                return categoryMatch && priceMatch && keywordMatch;
             });
 
-            // 2. ソート
             if (sortBy === 'price-asc') {
                 filteredProducts.sort((a, b) => a.price - b.price);
             } else if (sortBy === 'price-desc') {
@@ -633,64 +1227,505 @@
             }
 
             renderProductList(filteredProducts);
+            
+            const suggestionsDiv = document.getElementById('search-suggestions');
+            if (suggestionsDiv) suggestionsDiv.style.display = 'none';
         }
 
-        // 商品詳細ページをレンダリングする関数
-        function renderProductDetail(productId) {
-            const detail = productDetails[productId];
-            const detailPage = document.getElementById('product-detail-page');
-            
-            if (!detail) {
-                detailPage.innerHTML = '<p style="text-align: center; padding: 50px;">商品が見つかりませんでした。</p>';
-                return;
+
+        // === 4. モーダルとギャラリー機能 ===
+        function getStarRatingHtml(rating, count) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 !== 0;
+            let stars = '';
+
+            for (let i = 0; i < fullStars; i++) {
+                stars += '★';
+            }
+            if (halfStar) {
+                stars += '½'; 
             }
             
+            return `
+                <span class="star-rating">${stars}</span>
+                <span class="star-count">(${rating.toFixed(1)} / ${count}件のレビュー)</span>
+            `;
+        }
+        
+        function updateMainImage(imgSrc) {
+            const mainImg = document.getElementById('modal-main-img');
+            if (mainImg) mainImg.src = imgSrc;
+            
+            document.querySelectorAll('.modal-thumbnail-gallery img').forEach(img => {
+                img.classList.remove('active');
+                if (img.src.includes(imgSrc)) { 
+                    img.classList.add('active');
+                }
+            });
+        }
+        
+        function switchColorOption(element, colorName) {
+            document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+            console.log(`Color switched to: ${colorName}`);
+        }
+        
+        function openProductModal(productId) {
+            if (!modalBackdrop) return; 
+            const detail = productDetails[productId];
+            if (!detail) return;
+            
+            updateSeo('detail', { 
+                title: `${detail.name} | 製品情報 | ぺんとる`, 
+                desc: detail.seoDesc || detail.description 
+            });
+
+            const detailArea = document.getElementById('modal-detail-area');
+            document.getElementById('modal-product-name').textContent = detail.name;
+
             let featuresHtml = '<ul>';
             detail.features.forEach(f => featuresHtml += `<li>${f}</li>`);
             featuresHtml += '</ul>';
 
-            let imageDisplay = `<img src="${detail.imageSrc}" alt="${detail.imageAlt}" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999\\'>画像読み込みエラー</div>'">`;
+            let galleryHtml = '';
+            if (detail.images && detail.images.length > 0) {
+                const firstImage = detail.images[0];
+                galleryHtml += `
+                    <div class="modal-main-image">
+                        <img id="modal-main-img" src="${firstImage}" alt="${detail.name}のメイン画像">
+                    </div>
+                    <div class="modal-thumbnail-gallery">
+                `;
+                detail.images.forEach((imgSrc, index) => {
+                    galleryHtml += `<img src="${imgSrc}" alt="${detail.name}のサムネイル${index + 1}" class="${index === 0 ? 'active' : ''}" onclick="updateMainImage('${imgSrc}')">`;
+                });
+                galleryHtml += `</div>`;
+            }
 
-            detailPage.innerHTML = `
-                <p style="margin-bottom: 30px;"><a href="#products" onclick="showPage('products'); return false;" style="text-decoration: none; color: var(--main-color); font-weight: bold; display: inline-flex; align-items: center;">&lt; 商品一覧へ戻る</a></p>
-                <h2>${detail.name}</h2>
+            let colorOptionsHtml = '';
+            if (detail.colorOptions && detail.colorOptions.length > 0) {
+                colorOptionsHtml += `
+                    <h4 style="margin-top: 20px;">カラーバリエーション</h4>
+                    <div class="color-options">
+                `;
+                detail.colorOptions.forEach((color, index) => {
+                    colorOptionsHtml += `<div 
+                        class="color-option ${index === 0 ? 'active' : ''}" 
+                        style="background-color: ${color.code};" 
+                        title="${color.name}"
+                        onclick="switchColorOption(this, '${color.name}')"
+                    ></div>`;
+                });
+                colorOptionsHtml += `</div>`;
+            }
+
+            detailArea.innerHTML = `
+                <div class="detail-image-box">
+                    ${galleryHtml}
+                    ${colorOptionsHtml}
+                </div> 
+                <div class="product-detail-info">
+                    <p style="font-size: 1.8em; font-weight: bold; color: var(--accent-color); padding: 10px 0;">${detail.priceDisplay}</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        ${getStarRatingHtml(detail.rating, detail.reviewCount)}
+                    </div>
+                    
+                    <h3>製品概要</h3>
+                    <p>${detail.description}</p>
+                    
+                    <h3>主な仕様</h3>
+                    ${featuresHtml}
+                    
+                    <h3 style="margin-top: 30px;">ご購入・レビュー</h3>
+                    <p>この商品は全国の文具店、またはオンラインストアにてお買い求めいただけます。ご購入後のレビューも募集中です！</p>
+                </div>
+            `;
+
+            modalBackdrop.classList.add('open');
+            modalBackdrop.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeProductModal() {
+            if (!modalBackdrop) return;
+            modalBackdrop.classList.remove('open');
+            modalBackdrop.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; 
+            const currentHashPage = window.location.hash.substring(1).split('/')[0] || 'index';
+            updateSeo(currentHashPage); 
+        }
+        
+        // === 5. サイト内検索サジェスト機能 ===
+        function showSearchSuggestions(keyword) {
+            const suggestionsDiv = document.getElementById('search-suggestions');
+            if (!suggestionsDiv) return;
+
+            keyword = keyword.toLowerCase().trim();
+            suggestionsDiv.innerHTML = '';
+
+            if (keyword.length < 2) {
+                suggestionsDiv.style.display = 'none';
+                return;
+            }
+
+            const uniqueSuggestions = new Set();
+            Object.values(productDetails).forEach(p => {
+                if (p.name.toLowerCase().includes(keyword)) {
+                    uniqueSuggestions.add(p.name);
+                }
+                p.tags.forEach(tag => {
+                    if (tag.toLowerCase().includes(keyword)) {
+                        uniqueSuggestions.add(tag);
+                    }
+                });
+            });
+
+            if (uniqueSuggestions.size > 0) {
+                Array.from(uniqueSuggestions).slice(0, 5).forEach(suggestion => {
+                    const item = document.createElement('div');
+                    item.textContent = suggestion;
+                    item.addEventListener('mousedown', (e) => { // mousedownでblurより先に処理
+                        e.preventDefault();
+                        document.getElementById('search-box').value = suggestion;
+                        filterAndSortProducts(); 
+                        suggestionsDiv.style.display = 'none';
+                    });
+                    suggestionsDiv.appendChild(item);
+                });
+                suggestionsDiv.style.display = 'block';
+            } else {
+                suggestionsDiv.style.display = 'none';
+            }
+        }
+
+        // === 6. インターン・採用ページ制御 ===
+
+        /**
+         * 採用ページ内のタブを切り替える
+         */
+        function showRecruitmentTab(tabId, skipHistory = false) {
+            const tabBtns = document.querySelectorAll('.recruitment-tab-btn');
+            const contents = document.querySelectorAll('.recruitment-content');
+            if (tabBtns.length === 0 || contents.length === 0) return;
+
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            contents.forEach(content => content.style.display = 'none');
+            
+            const targetContent = document.getElementById(`${tabId}-info`);
+            const targetButton = document.getElementById(`tab-btn-${tabId}`);
+            
+            if (targetContent && targetButton) {
+                targetContent.style.display = 'block';
+                targetButton.classList.add('active');
                 
-                <div class="product-detail-area" style="display:flex; gap:40px; flex-wrap:wrap; margin-top: 40px;">
-                    <div class="detail-image-box" style="flex-shrink:0; max-width:400px; width: 100%;">
-                        ${imageDisplay} 
-                    </div> 
-                    <div class="product-detail-info" style="flex-grow:1; min-width:300px;">
-                        <p style="font-size: 1.8em; font-weight: bold; color: var(--accent-color); padding: 10px 0; border-bottom: 2px solid #eee;">${detail.priceDisplay}</p>
-                        
-                        <h3>製品概要</h3>
-                        <p>${detail.description}</p>
-                        
-                        <h3>主な仕様</h3>
-                        <p><strong>カテゴリ:</strong> ${detail.category === 'pen' ? '筆記具' : detail.category === 'eraser' ? '消す・修正' : '紙製品・ノート'}</p>
-                        ${featuresHtml}
-                        
-                        <h3 style="margin-top: 30px;">ご購入・お問い合わせ</h3>
-                        <p>この商品は全国の文具店、またはオンラインストアにてお買い求めいただけます。</p>
+                if (tabId === 'intern') {
+                    showEntryForm();
+                }
+
+                if (!skipHistory) {
+                    window.history.pushState({ page: 'recruitment', tab: tabId }, '', `#recruitment/${tabId}`);
+                }
+            } else {
+                 showRecruitmentTab('intern', skipHistory);
+            }
+        }
+
+        /**
+         * フォーム入力画面を表示する
+         */
+        function showEntryForm() {
+            const wrapper = document.getElementById('intern-form-wrapper');
+            if (!wrapper) return; 
+            
+            let formHtml = '<h4>インターン申し込み (入力)</h4>';
+            
+            formFields.forEach(field => {
+                const value = internFormData[field.id] || '';
+                const type = field.type || 'text';
+                const requiredClass = field.required ? ' required' : '';
+                
+                // **【修正点 2】ラジオボタンの生成ロジックを追加**
+                if (type === 'radio' && field.options) {
+                    let radioHtml = `<div class="form-group">
+                                        <label class="${requiredClass}">${field.label}</label>
+                                        <div id="${field.id}-radios" class="radio-group" style="margin-top: 10px;">`;
+                    
+                    field.options.forEach(option => {
+                        const checked = (internFormData[field.id] === option.value) ? 'checked' : (field.required && !internFormData[field.id] && option.value === field.options[0].value ? 'checked' : ''); // 最初の項目を初期選択
+                        radioHtml += `
+                            <label style="display: block; margin-bottom: 8px;">
+                                <input type="radio" name="${field.id}" value="${option.value}" ${checked} required>
+                                ${option.label}
+                            </label>
+                        `;
+                    });
+                    
+                    radioHtml += `</div>
+                                  <p id="${field.id}-error" class="error-message">参加希望日程を選択してください。</p>
+                                  </div>`;
+                    formHtml += radioHtml;
+
+                } else {
+                    // 既存のテキスト/メール/電話フィールドのロジック
+                    formHtml += `
+                        <div class="form-group">
+                            <label for="${field.id}" class="${requiredClass}">${field.label}</label>
+                            <input type="${type}" id="${field.id}" value="${value}" placeholder="${field.label}" ${field.required ? 'required' : ''}>
+                            <p id="${field.id}-error" class="error-message">入力必須項目です。</p>
+                        </div>
+                    `;
+                }
+            });
+            
+            formHtml += `
+                <div class="form-actions">
+                    <button class="btn-primary" onclick="validateAndProceed()">確認画面へ進む</button>
+                </div>
+            `;
+            wrapper.innerHTML = formHtml;
+        }
+
+        /**
+         * フォームのバリデーションを行い、成功したら確認画面へ進む
+         */
+        function validateAndProceed() {
+            let isValid = true;
+            let currentData = {}; // 一時的にデータを保持
+            
+            formFields.forEach(field => {
+                const errorElement = document.getElementById(`${field.id}-error`);
+                if (!errorElement) return;
+
+                // **【修正点 3-1】ラジオボタンのバリデーションロジック**
+                if (field.type === 'radio') {
+                    const selectedRadio = document.querySelector(`input[name="${field.id}"]:checked`);
+                    if (selectedRadio) {
+                        currentData[field.id] = selectedRadio.value;
+                        errorElement.style.display = 'none';
+                    } else if (field.required) {
+                        errorElement.style.display = 'block';
+                        errorElement.textContent = '参加希望日程を選択してください。';
+                        isValid = false;
+                    }
+                } else {
+                    // 既存のテキスト/メール/電話フィールドのバリデーションロジック
+                    const inputElement = document.getElementById(field.id);
+                    if (!inputElement) return;
+
+                    let value = inputElement.value.trim();
+                    
+                    if (field.required && value === '') {
+                        errorElement.style.display = 'block';
+                        errorElement.textContent = '入力必須項目です。';
+                        isValid = false;
+                    } else if (field.type === 'email' && value !== '' && !/@/.test(value)) {
+                        errorElement.textContent = '有効なメールアドレスを入力してください。';
+                        errorElement.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        errorElement.style.display = 'none';
+                        errorElement.textContent = '入力必須項目です。'; 
+                        currentData[field.id] = value;
+                    }
+                }
+            });
+
+            if (isValid) {
+                // **【修正点 3-2】バリデーション通過後にデータを格納**
+                internFormData = currentData;
+                showConfirmScreen();
+            }
+        }
+
+        /**
+         * 確認画面を表示する
+         */
+        function showConfirmScreen() {
+            const wrapper = document.getElementById('intern-form-wrapper');
+            if (!wrapper) return; 
+
+            let confirmHtml = '<h4>インターン申し込み (確認)</h4>';
+            
+            confirmHtml += '<p>以下の内容で間違いがないかご確認ください。</p>';
+            confirmHtml += '<table class="confirm-table">';
+            
+            // **【修正点 4】確認画面の表示ロジックを修正 (特に日程)**
+            formFields.forEach(field => {
+                let displayValue = internFormData[field.id];
+                
+                if (field.id === 'schedule' && field.options) {
+                    const selectedOption = field.options.find(opt => opt.value === displayValue);
+                    displayValue = selectedOption ? selectedOption.label : displayValue;
+                }
+
+                confirmHtml += `
+                    <tr>
+                        <th>${field.label}</th>
+                        <td>${displayValue}</td>
+                    </tr>
+                `;
+            });
+
+            confirmHtml += '</table>';
+            
+            confirmHtml += `
+                <div class="form-actions">
+                    <button class="btn-secondary" onclick="showEntryForm()">入力画面に戻る</button>
+                    <button class="btn-primary" onclick="submitEntry()">エントリーを完了する</button>
+                </div>
+            `;
+            wrapper.innerHTML = confirmHtml;
+        }
+
+        /**
+         * エントリーを完了し、完了画面を表示する
+         */
+        function submitEntry() {
+            const wrapper = document.getElementById('intern-form-wrapper');
+            if (!wrapper) return; 
+            
+            wrapper.innerHTML = `
+                <div id="completion-message">
+                    <h4 style="color: #1e7e34;">✅ エントリー完了いたしました</h4>
+                    <p>${internFormData.name}様、インターンシップへのエントリーありがとうございます。</p>
+                    <p>ご入力いただいたメールアドレス（${internFormData.email}）宛に、後日詳細をご連絡いたします。</p>
+                    <div class="form-actions" style="margin-top: 20px;">
+                        <a href="#index" onclick="showPage('index'); return false;" class="btn-primary" style="text-decoration: none;">トップページに戻る</a>
                     </div>
                 </div>
             `;
+            internFormData = {};
         }
 
-        // URLハッシュに基づいてページをロードする関数
-        function loadPageFromHash() {
-            const hash = window.location.hash || '#index';
-            const parts = hash.substring(1).split('/');
-            const pageId = parts[0];
-            const productId = parts[1] || null;
+        // === 7. 初期化とイベントリスナー ===
 
-            // newsアンカーはトップページへ
-            if (pageId === 'news') {
-                showPage('index', null, true);
-                document.getElementById('news-anchor').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                showPage(pageId, productId, true);
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 必須要素の初期化
+            pages = {
+                'index': document.getElementById('index-page'),
+                'products': document.getElementById('products-page'),
+                'company': document.getElementById('company-page'),
+                'recruitment': document.getElementById('recruitment-page'), 
+                'contact': document.getElementById('contact-page'),
+                'error': document.getElementById('error-page') 
+            };
+            navLinks = document.querySelectorAll('header nav a');
+            modalBackdrop = document.getElementById('product-modal-backdrop');
+            
+            // 2. ニュースリストの生成
+            const newsList = document.getElementById('newsList');
+            if (newsList) {
+                 news.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span style="font-weight: bold; margin-right: 10px; color: var(--accent-color);">${item.date}</span> <span>${item.text}</span>`;
+                    newsList.appendChild(li);
+                });
             }
-        }
+
+            // 3. フィルタ・ソート機能のイベントリスナー設定
+            const categoryFilter = document.getElementById('category-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const sortSelect = document.getElementById('sort-select');
+            const searchBox = document.getElementById('search-box');
+
+            if (categoryFilter) categoryFilter.addEventListener('change', filterAndSortProducts);
+            if (priceFilter) priceFilter.addEventListener('change', filterAndSortProducts);
+            if (sortSelect) sortSelect.addEventListener('change', filterAndSortProducts);
+            
+            // 検索サジェスト機能のリスナー設定
+            if (searchBox) {
+                const suggestionsDiv = document.getElementById('search-suggestions');
+                searchBox.addEventListener('input', (e) => {
+                    filterAndSortProducts();
+                    showSearchSuggestions(e.target.value);
+                });
+                searchBox.addEventListener('blur', () => {
+                    setTimeout(() => { 
+                        if (suggestionsDiv) suggestionsDiv.style.display = 'none'; 
+                    }, 150); 
+                });
+                searchBox.addEventListener('focus', (e) => {
+                    showSearchSuggestions(e.target.value);
+                });
+            }
+
+            // 4. ナビゲーションリンクのイベントリスナー設定
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page');
+
+                    if (link.id === 'nav-news') {
+                        showPage('index'); 
+                        setTimeout(() => { 
+                            const newsAnchor = document.getElementById('news-anchor');
+                            if (newsAnchor) {
+                                newsAnchor.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }, 100); 
+                    } else {
+                        showPage(pageId);
+                    }
+                    closeProductModal(); 
+                });
+            });
+            
+            // 5. モーダル関連イベントリスナー
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProductModal);
+            if (modalBackdrop) {
+                modalBackdrop.addEventListener('click', (e) => {
+                    if (e.target.id === 'product-modal-backdrop') {
+                        closeProductModal(); 
+                    }
+                });
+            }
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modalBackdrop && modalBackdrop.classList.contains('open')) {
+                    closeProductModal(); 
+                }
+            });
+
+            // 6. ブラウザの「戻る/進む」ボタンに対応
+            window.addEventListener('popstate', (e) => {
+                if (window.location.hash.includes('#products/') && e.state && e.state.product) {
+                    openProductModal(e.state.product);
+                } else if (window.location.hash.includes('#recruitment/') && e.state && e.state.tab) {
+                    showRecruitmentTab(e.state.tab, true);
+                } else {
+                    closeProductModal(); 
+                    loadPageFromHash();
+                }
+            });
+            
+            // 7. Topへ戻るボタンの表示/非表示制御
+            const backToTopButton = document.getElementById('back-to-top');
+            if (backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) { 
+                        backToTopButton.style.display = 'block';
+                        backToTopButton.style.opacity = 1;
+                    } else {
+                        backToTopButton.style.opacity = 0;
+                        setTimeout(() => {
+                            if (window.scrollY <= 300) {
+                                backToTopButton.style.display = 'none';
+                            }
+                        }, 300); 
+                    }
+                });
+            }
+            
+            // 8. 製品ナビゲーターのイベントリスナー設定
+            setupProductNavListeners();
+            
+            // 9. トップページの注目製品をレンダリング
+            renderFeaturedProducts();
+
+            // 10. 初期表示をURLハッシュからロード
+            loadPageFromHash();
+        });
         
         // カテゴリナビゲーションのイベント設定
         function setupProductNavListeners() {
@@ -700,53 +1735,16 @@
                     const category = item.getAttribute('data-category-link');
                     
                     showPage('products');
-                    // フィルターを該当カテゴリに設定して再フィルタリング
-                    document.getElementById('category-filter').value = category;
-                    document.getElementById('search-box').value = '';
+                    const categoryFilter = document.getElementById('category-filter');
+                    if (categoryFilter) categoryFilter.value = category;
+                    const priceFilter = document.getElementById('price-filter');
+                    if (priceFilter) priceFilter.value = 'all';
+                    const searchBox = document.getElementById('search-box');
+                    if (searchBox) searchBox.value = '';
                     filterAndSortProducts();
                 });
             });
         }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // 初期表示をURLハッシュからロード
-            loadPageFromHash();
-
-            // ニュースリストの生成
-            const newsList = document.getElementById('newsList');
-            news.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span class="date">${item.date}</span> <span>${item.text}</span>`;
-                newsList.appendChild(li);
-            });
-
-            // フィルタ・ソート機能のイベントリスナー設定 (PRODUCTSページ)
-            document.getElementById('category-filter').addEventListener('change', filterAndSortProducts);
-            document.getElementById('sort-select').addEventListener('change', filterAndSortProducts);
-            document.getElementById('search-box').addEventListener('input', filterAndSortProducts);
-
-            // ナビゲーションリンクのイベントリスナー設定 (History API対応)
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const pageId = link.getAttribute('data-page');
-
-                    if (pageId !== 'index' || link.id === 'nav-products' || link.id === 'nav-company' || link.id === 'nav-recruitment' || link.id === 'nav-contact') {
-                         showPage(pageId);
-                    }
-                    // NEWS/TOPICSボタンはインデックスページでアンカーへスクロールするJSがあるため、そのまま続行
-                });
-            });
-            
-            // ブラウザの「戻る/進む」ボタンに対応
-            window.addEventListener('popstate', (e) => {
-                loadPageFromHash();
-            });
-            
-            // 製品ナビゲーターのイベントリスナー設定
-            setupProductNavListeners();
-        });
     </script>
 </body>
 </html>
