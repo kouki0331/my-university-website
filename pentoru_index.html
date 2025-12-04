@@ -724,7 +724,7 @@
             </a>
         </div>
         <nav>
-            <a id="nav-news" data-page="index" href="#news" aria-current="false">TOP / NEWS</a> 
+            <a id="nav-news" data-page="index" href="#news" aria-current="false">NEWS / TOPICS</a> 
             <a id="nav-products" data-page="products" href="#products" aria-current="false">PRODUCTS</a> 
             <a id="nav-company" data-page="company" href="#company" aria-current="false">CORPORATE</a> 
             <a id="nav-recruitment" data-page="recruitment" href="#recruitment" aria-current="false">RECRUITMENT</a> 
@@ -966,7 +966,7 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="#index" onclick="showPage('index'); return false;">TOP</a>
+            <a href="#index" onclick="showPage('index'); return false;">NEWS / TOPICS</a>
             <a href="#products" onclick="showPage('products'); return false;">PRODUCTS</a>
             <a href="#company" onclick="showPage('company'); return false;">CORPORATE</a>
             <a href="#recruitment" onclick="showPage('recruitment'); showRecruitmentTab('intern'); return false;">INTERN</a>
@@ -1816,6 +1816,9 @@
         // カテゴリナビゲーションのイベント設定
         function setupProductNavListeners() {
             document.querySelectorAll('.product-nav-item').forEach(item => {
+                // 企業情報ボタンは除外
+                if(item.textContent.trim() === '企業情報を見る') return; 
+
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
                     const category = item.getAttribute('data-category-link');
