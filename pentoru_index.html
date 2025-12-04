@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ぺんとる - 「書く」「消す」の未来をデザインする文具メーカー</title>
+    
+    <style>
+        /* CSS変数の定義 */
+        :root {
+            --main-color: #004d99;      /* 濃い青 */
+            --accent-color: #ff7700;    /* ポップなオレンジ */
+            --light-bg: #f5f8fa;        /* 非常に明るい背景 */
+            --white: #ffffff;
+            --text-color: #333;
+            --sub-text-color: #666;
+            --corporate-color: #333; 
+        }
+
+        /* 共通基本設定 */
+        body { 
+            font-family: 'Yu Gothic', 'Meiryo', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.7; 
+            color: var(--text-color); 
+            background-color: var(--light-bg); 
+            font-size: 16px; 
+            scroll-behavior: smooth; /* スムーズスクロール追加 */
+        }
+        h1, h2, h3 { 
+            color: var(--main-color); 
+            margin-top: 0.5em; 
+            margin-bottom: 0.5em; 
+        }
+        h1 { 
+            font-size: 2.2em; 
+            font-weight: 700; 
+        }
+        h2 { 
+            text-align: center;
+            font-size: 2.0em; 
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 5px;
+            position: relative;
+            color: var(--corporate-color); 
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px; /* 線を長くして存在感を出す */
+            height: 4px; /* 線を太くする */
+            background-color: var(--accent-color);
+        }
+        .content { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0; 
+        }
+        .section-padding { max-width: 1000px; margin: 0 auto; padding: 80px 20px; }
+        
+        /* ヘッダーとナビゲーション */
+        header { 
+            background-color: var(--white); 
+            padding: 15px 50px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* 影を強調 */
+            position: sticky; /* スティッキーヘッダー */
+            top: 0;
+            z-index: 1000;
+        }
+        header a { color: inherit; text-decoration: none; } 
+        header h1 { margin: 0; color: var(--main-color); font-size: 1.8em; }
+        header p { margin: 0; font-size: 0.9em; color: var(--sub-text-color); }
+        
+        nav a { 
+            display: inline-block; /* floatをinline-blockに変更 */
+            color: var(--main-color); 
+            text-align: center; 
+            padding: 10px 15px; 
+            margin-left: 10px;
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background-color 0.3s, color 0.3s; 
+            font-size: 0.95em; 
+            border-bottom: 3px solid transparent;
+        }
+        nav a:hover, nav a.active { 
+            color: var(--accent-color); 
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        /* トップページ (index) */
+        #main-visual-banner { 
+            height: 450px; 
+            margin-bottom: 0; 
+            overflow: hidden; 
+        }
+        #main-visual-banner img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center 30%; /* 中心からやや上を基準にする */
+        }
+        
+        /* 注目製品 (Featured Products) */
+        .featured-products { background-color: var(--white); }
+        .featured-product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        /* 製品カードを<a>タグに変更し、アクセシビリティを確保 */
+        .featured-product-card, .product-card {
+            display: block; /* <a>タグをブロック要素にする */
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            background-color: var(--white);
+            color: var(--text-color); /* リンクの色をリセット */
+            text-decoration: none;
+        }
+        .featured-product-card:hover, .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .featured-product-card { max-width: 300px; flex: 1; } 
+        .featured-product-card .image-placeholder { height: 200px; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        .featured-product-card img { width: 100%; height: 100%; object-fit: contain; }
+        .featured-product-card h3 { font-size: 1.2em; padding: 15px 10px 5px; margin: 0; color: var(--main-color); }
+        .featured-product-card p { font-size: 0.9em; padding: 0 10px 15px; margin: 0; }
+
+        /* NEWS/TOPICS */
+        .news-section { background-color: var(--light-bg); border-top: 1px solid #ddd; }
+        #newsList { list-style: none; padding-left: 0; background-color: var(--white); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+        #newsList li { border-bottom: 1px dashed #ddd; padding: 15px 25px; display: flex; gap: 20px; transition: background-color 0.2s; }
+        #newsList li:hover { background-color: #f7f7f7; cursor: pointer; }
+        #newsList .date { font-weight: bold; color: var(--main-color); flex-shrink: 0; }
+
+        /* PRODUCT CATEGORY NAVIGATOR */
+        .product-nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .product-nav-item {
+            padding: 15px 30px;
+            border: 2px solid var(--main-color); /* ボーダーを太く */
+            color: var(--main-color);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            flex-grow: 1;
+            max-width: 200px;
+            text-align: center;
+        }
+        .product-nav-item:hover {
+            background-color: var(--main-color);
+            color: var(--white);
+        }
+
+        /* PRODUCT LIST PAGE */
+        .filter-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .filter-controls > div {
+            flex-grow: 1;
+            min-width: 150px;
+        }
+        .filter-controls label, .filter-controls select, .filter-controls input {
+            display: block;
+            width: 100%;
+        }
+        .filter-controls select, .filter-controls input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* グリッドレイアウト */
+            gap: 30px;
+        }
+        .product-card {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: var(--white);
+        }
+        .product-card .image-placeholder {
+            height: 200px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .product-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .product-card h3 { font-size: 1.3em; color: var(--main-color); }
+        .product-card .price { font-weight: bold; color: var(--accent-color); margin-top: 10px; }
+
+        /* PRODUCT DETAIL PAGE */
+        .product-detail-area img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+
+        /* 企業情報 / 採用情報 */
+        .mission-blockquote { 
+            background-color: #e6f0ff; 
+            border-left: 8px solid var(--main-color); 
+            padding: 30px; 
+            margin: 30px 0; 
+            border-radius: 4px;
+        }
+        .company-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px;
+            background-color: var(--white);
+        }
+        .company-table th, .company-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .company-table th { 
+            background-color: #f0f8ff; 
+            width: 30%;
+            font-weight: bold;
+            color: var(--main-color);
+        }
+        
+        /* フッター */
+        footer { 
+            text-align: center; 
+            padding: 25px; 
+            margin-top: 0; 
+            background-color: var(--corporate-color); 
+            color: #fff; 
+            font-size: 0.9em; 
+        }
+
+        /* === レスポンシブデザインのためのMedia Query === */
+        @media (max-width: 992px) {
+            header { padding: 15px 20px; }
+            nav a { padding: 8px 10px; margin-left: 5px; font-size: 0.9em; }
+            .section-padding { padding: 50px 15px; }
+            .featured-product-grid { flex-wrap: wrap; }
+            .featured-product-card { max-width: 45%; }
+            .product-nav-container { flex-wrap: wrap; }
+            .product-nav-item { max-width: 45%; }
+            .filter-controls { flex-wrap: wrap; }
+            .filter-controls > div { min-width: 100%; margin-bottom: 10px; }
+        }
+
+        @media (max-width: 600px) {
+            header { 
+                flex-direction: column; 
+                align-items: flex-start;
+            }
+            nav {
+                margin-top: 10px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                width: 100%;
+            }
+            nav a { margin: 0; flex-grow: 1; text-align: center; }
+            h2 { font-size: 1.7em; }
+            #main-visual-banner { height: 300px; }
+            .featured-product-card { max-width: 100%; }
+            .product-nav-item { max-width: 100%; }
+            .product-list { grid-template-columns: 1fr; }
+            .product-detail-area { flex-direction: column; }
+            .detail-image-box { max-width: 100% !important; } /* モバイルで画像を全幅に */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <a href="#index" onclick="showPage('index'); return false;">
+                <h1>ぺんとる</h1>
+                <p>文具メーカー公式サイト</p>
+            </a>
+        </div>
+        <nav>
+            <a id="nav-products" data-page="products" href="#products">PRODUCTS</a> 
+            <a id="nav-news" data-page="index" href="#news" onclick="document.getElementById('news-anchor').scrollIntoView({ behavior: 'smooth' }); return false;">NEWS / TOPICS</a>
+            <a id="nav-company" data-page="company" href="#company">CORPORATE</a> 
+            <a id="nav-recruitment" data-page="recruitment" href="#recruitment">RECRUITMENT</a> 
+            <a id="nav-contact" data-page="contact" href="#contact">CONTACT</a>
+        </nav>
+    </header>
+
+    <div id="page-container" class="content">
+
+        <div id="index-page">
+            
+            <div id="main-visual-banner">
+                <img src="images/Gemini_Generated_Image_ehhzqmehhzqmehhz.jpg" alt="ぺんとるの文房具コレクション">
+            </div>
+            
+            <section class="featured-products section-padding">
+                <h2>FEATURED PRODUCTS / 注目製品</h2>
+                <p style="color: var(--main-color); font-weight: bold; margin-bottom: 40px; text-align: center;">いま「ぺんとる」が最もおすすめする革新的な文具たち</p>
+                <div class="featured-product-grid" id="featured-product-container">
+                </div>
+                <div class="view-all-link" style="margin-top: 40px;">
+                    <a href="#" onclick="showPage('products'); return false;" style="color: var(--main-color); text-decoration: none;">全製品を見る &gt;</a>
+                </div>
+            </section>
+
+
+            <section class="news-section section-padding">
+                <h2 id="news-anchor">NEWS / TOPICS</h2>
+                <ul id="newsList"></ul>
+                <div class="view-all-link">
+                    <a href="#" onclick="alert('ニュース一覧ページへ遷移します'); return false;" style="color: var(--main-color); text-decoration: none;">最新情報をもっと見る &gt;</a>
+                </div>
+            </section>
+            
+            <section class="product-nav-section section-padding">
+                <h2>PRODUCT CATEGORY / 製品カテゴリ</h2>
+                <p style="font-size: 1.1em; color: var(--sub-text-color); text-align: center;">用途やお好みに合わせて、製品カテゴリからお探しいただけます。</p>
+                <div class="product-nav-container">
+                    <a href="#pen" class="product-nav-item" data-category-link="pen">🖋️ 筆記具</a>
+                    <a href="#eraser" class="product-nav-item" data-category-link="eraser">🧼 消す・修正</a>
+                    <a href="#paper" class="product-nav-item" data-category-link="paper">📒 紙製品・ノート</a>
+                </div>
+            </section>
+            
+            <section class="corporate-highlight-section section-padding">
+                <h2>CORPORATE / 企業情報</h2>
+                <p>ぺんとるは「**素材に挑み、未来を描く**」を理念とし、使いやすさと革新を追求した文房具製品を開発・製造しています。</p>
+                <a href="#" onclick="showPage('company'); return false;" style="color: var(--main-color); font-weight: bold; text-decoration: none;">会社概要・沿革を見る &gt;</a>
+            </section>
+
+        </div>
+
+        <div id="products-page" style="display:none;" class="section-padding" >
+            <h2>PRODUCTS / 商品ラインナップ</h2>
+            <p>ぺんとるが誇る高品質な文房具の数々をご紹介します。用途やカテゴリに応じてお探しください。</p>
+
+            <div class="filter-controls">
+                <div>
+                    <label for="category-filter">カテゴリで絞り込む:</label>
+                    <select id="category-filter">
+                        <option value="all">すべての商品</option>
+                        <option value="pen">筆記具（ペン・マーカー）</option>
+                        <option value="eraser">消す・修正</option>
+                        <option value="paper">紙製品・ノート</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sort-select">並べ替え:</label>
+                    <select id="sort-select">
+                        <option value="default">おすすめ順</option>
+                        <option value="price-asc">価格の安い順</option>
+                        <option value="price-desc">価格の高い順</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="search-box">キーワード検索:</label>
+                    <input type="text" id="search-box" placeholder="例: ジェルペン、エコ">
+                </div>
+            </div>
+
+            <div class="product-list" id="product-list-container">
+            </div>
+        </div>
+
+        <div id="product-detail-page" style="display:none;" class="section-padding"></div>
+
+        <div id="company-page" style="display:none;" class="section-padding">
+            <h2>CORPORATE / 企業情報・理念</h2>
+            <div class="mission-blockquote">
+                <p>企業理念： 「素材に挑み、未来を描く」</p>
+                <p><strong>ミッション（果たすべき使命）</strong>： 私たちは、文具の素材と精密技術の限界に挑み、ユーザーの想像を超える新しい価値を創造し続けます。シャーペン、ボールペン、消しゴムの核心技術を磨き、「書く」「消す」行為の未来をデザインすることで、社会の発展に貢献します。</p>
+            </div>
+
+            <h3>会社概要</h3>
+            <table class="company-table">
+                <tr><th>会社名</th><td>ぺんとる</td></tr>
+                <tr><th>社長名</th><td>水原 光葵</td></tr>
+                <tr><th>業種</th><td>文具メーカー</td></tr>
+                <tr><th>主たる業務</th><td>各種文房具の自社ブランド製品開発</td></tr>
+                <tr><th>創業</th><td>2005年3月</td></tr>
+                <tr><th>資本金</th><td>1000万円</td></tr>
+                <tr><th>年商</th><td>10億円</td></tr>
+                <tr><th>規模（従業員数）</th><td>正社員300名</td></tr>
+                <tr><th>支社（支店）数等</th><td>本社・平塚工場</td></tr>
+            </table>
+        </div>
+
+        <div id="recruitment-page" style="display:none;" class="section-padding">
+            <h2>RECRUITMENT / 採用情報</h2>
+            <p>ぺんとるでは、文具の未来を共に創造する熱意ある仲間を求めています。詳細な募集要項は、別途採用特設サイトをご確認ください。</p>
+
+            <h3>募集要項（総合職抜粋）</h3>
+            <table class="company-table">
+                <tr><th>募集職種</th><td>総合職（事務、営業、技術）</td></tr>
+                <tr><th>応募資格</th><td>2026年大学卒業見込みまたは大学院修了見込みの方</td></tr>
+                <tr><th>初任給</th><td>大学院修了：231,900円 / 大学卒：221,100円</td></tr>
+                <tr><th>勤務地</th><td>神奈川県平塚市北金目１－８８－１２</td></tr>
+                <tr><th>休日休暇</th><td>年間休日124日（土日、祝日、年末年始休暇、慶弔休暇、有給休暇 他）</td></tr>
+            </table>
+            <p style="text-align: right; margin-top: 30px;"><a href="#" onclick="showPage('contact'); return false;" style="color: var(--accent-color); font-weight: bold;">採用に関するお問い合わせはこちら &gt;</a></p>
+        </div>
+
+        <div id="contact-page" style="display:none;" class="section-padding">
+            <h2>CONTACT / お問い合わせ</h2>
+            <p>当社へのお問い合わせは、こちらのフォームをご利用ください。（フォームの実装は省略）</p>
+            <p>製品に関するお問い合わせ、企業に関するお問い合わせ、採用に関するお問い合わせなど、窓口が分かれておりますのでご注意ください。</p>
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>Copyright © 2005-2025 Pentol All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // ニュースと新製品情報は既存のものを流用
+        const news = [
+            { date: "2025.11.27", text: "サイトを全面リニューアルしました。" },
+            { date: "2025.11.20", text: "製品情報ページにカテゴリ別フィルタ機能を追加しました。" },
+            { date: "2025.11.10", text: "年末年始の休業のお知らせ。" },
+            { date: "2025.10.01", text: "2026年新卒採用の二次募集を開始しました。" }
+        ];
+
+        // 商品詳細データ (画像パスは images/ フォルダ前提)
+        const productDetails = {
+            "Z1": {
+                id: "Z1", name: "スーパージェルペン Z1",
+                description: "当社の技術の粋を集めたフラッグシップモデル。低粘度ゲルインクを採用し、圧倒的になめらかな書き味を実現しました。", price: 450, priceDisplay: "¥450 (税込)",
+                features: ["インク色: 黒, 赤, 青", "ボール径: 0.5mm/0.7mm", "替芯: R-Z1"], category: "pen",
+                imageSrc: "images/images.jpg", imageAlt: "スーパージェルペン Z1の画像"
+            },
+            "Eraser1": {
+                id: "Eraser1", name: "軽く消せる消しゴム",
+                description: "独自の配合により、消字性が向上。力を入れなくても軽くきれいに消せ、消しクズがまとまりやすいのが特徴です。", price: 120, priceDisplay: "¥120 (税込)",
+                features: ["サイズ: 55x22x10mm", "素材: エコポリマー", "カラー: 白, 黒"], category: "eraser",
+                imageSrc: "images/images_eraser.jpg", imageAlt: "軽く消せる消しゴムの画像"
+            },
+            "MP1": {
+                id: "MP1", name: "自動芯出しシャープペン",
+                description: "ノック一回で書き始め、芯が短くなると自動で繰り出される機構を搭載。集中力を途切れさせません。", price: 800, priceDisplay: "¥800 (税込)",
+                features: ["芯径: 0.5mm", "機構: 自動芯出し", "素材: 金属製グリップ", "カラー: 5色展開"], category: "pen",
+                imageSrc: "images/Gemini_Generated_Image_iny88biny88biny88.jpg", imageAlt: "自動芯出しシャープペンの画像"
+            },
+            "NoteA5": {
+                id: "NoteA5", name: "学習用A5ノート",
+                description: "学生の声を取り入れ開発された、学習に最適なA5サイズのノート。裏写りしにくいオリジナル用紙を使用しています。", price: 350, priceDisplay: "¥350 (税込)",
+                features: ["サイズ: A5", "罫線: 7mm B罫", "枚数: 40枚", "特長: 裏写り防止用紙"], category: "paper",
+                imageSrc: "images/Gemini_Generated_Image_lxh9uulxh9uulxh9.jpg", imageAlt: "学習用A5ノートの画像"
+            },
+            "EcoPen": {
+                id: "EcoPen", name: "木軸ボールペン エコ",
+                description: "再生木材を使用した、環境に配慮したノック式ボールペン。落ち着いたデザインでビジネスシーンにも最適です。", price: 500, priceDisplay: "¥500 (税込)",
+                features: ["インク色: 黒", "ボール径: 0.7mm", "素材: 再生木材", "替芯: R-B07"], category: "pen",
+                imageSrc: "images/EcoPen.jpg", imageAlt: "木軸ボールペン エコの画像"
+            }
+        };
+
+        const pages = {
+            'index': document.getElementById('index-page'),
+            'products': document.getElementById('products-page'),
+            'company': document.getElementById('company-page'),
+            'recruitment': document.getElementById('recruitment-page'), 
+            'contact': document.getElementById('contact-page'),
+            'detail': document.getElementById('product-detail-page'), 
+        };
+        const navLinks = document.querySelectorAll('header nav a');
+        
+        /**
+         * ページを切り替えるメイン関数 (History API対応)
+         * @param {string} pageId - 表示するページID
+         * @param {string|null} productId - 詳細ページの場合の商品ID
+         * @param {boolean} skipHistory - 履歴の変更をスキップするか
+         */
+        function showPage(pageId, productId = null, skipHistory = false) {
+            Object.values(pages).forEach(page => page.style.display = 'none');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            let stateUrl = '#index'; 
+            let activePageId = pageId;
+
+            if (pageId === 'detail' && productId) {
+                pages['detail'].style.display = 'block';
+                renderProductDetail(productId);
+                document.querySelector(`[data-page="products"]`).classList.add('active'); 
+                stateUrl = `#products/${productId}`;
+                activePageId = 'products';
+            } else if (pages[pageId]) {
+                pages[pageId].style.display = 'block';
+                const activeLink = document.querySelector(`[data-page="${activePageId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+                stateUrl = `#${pageId}`;
+            }
+            
+            // History APIでURLと履歴を更新
+            if (!skipHistory) {
+                window.history.pushState({ page: pageId, product: productId }, '', stateUrl);
+            }
+
+            if (pageId === 'products') {
+                 filterAndSortProducts();
+            }
+            window.scrollTo(0, 0); 
+        }
+
+        /**
+         * 注目製品をトップページにレンダリングする関数
+         */
+        function renderFeaturedProducts() {
+            const container = document.getElementById('featured-product-container');
+            if (!container) return; 
+
+            container.innerHTML = '';
+            
+            // 注目製品として、Z1, Eraser1, MP1を選ぶ
+            const featuredIds = ["Z1", "Eraser1", "MP1"]; 
+
+            featuredIds.forEach(id => {
+                const detail = productDetails[id];
+                if (!detail) return;
+
+                // divからaタグに変更
+                const card = document.createElement('a'); 
+                card.className = 'featured-product-card';
+                card.href = `#products/${detail.id}`; // リンク先を設定
+                
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage('detail', detail.id);
+                });
+
+                card.innerHTML = `
+                    <div class="image-placeholder">
+                        <img src="${detail.imageSrc}" alt="${detail.imageAlt}" onerror="this.src='placeholder.png';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.8em;\\'>画像エラー</div>'">
+                    </div>
+                    <h3>${detail.name}</h3>
+                    <p>${detail.description.substring(0, 30)}...</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        // 商品一覧をレンダリングする関数
+        function renderProductList(products) {
+            const container = document.getElementById('product-list-container');
+            container.innerHTML = ''; 
+
+            if (products.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 50px;">該当する商品が見つかりませんでした。</p>';
+                return;
+            }
+
+            products.forEach(detail => {
+                // divからaタグに変更
+                const card = document.createElement('a'); 
+                card.className = 'product-card';
+                card.href = `#products/${detail.id}`; // リンク先を設定
+                card.setAttribute('data-category', detail.category);
+                card.setAttribute('data-price', detail.price);
+                
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage('detail', detail.id);
+                });
+                
+                card.innerHTML = `
+                    <div class="image-placeholder">
+                        <img src="${detail.imageSrc}" alt="${detail.imageAlt}" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999;font-size:0.9em;\\'>画像エラー</div>'">
+                    </div>
+                    <h3>${detail.name}</h3>
+                    <p>${detail.description.substring(0, 45)}...</p>
+                    <p class="price">${detail.priceDisplay}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // フィルタリングとソートを実行する関数
+        function filterAndSortProducts() {
+            const category = document.getElementById('category-filter').value;
+            const sortBy = document.getElementById('sort-select').value;
+            const searchKeyword = document.getElementById('search-box').value.toLowerCase();
+
+            let productsArray = Object.values(productDetails);
+
+            // 1. フィルタリング
+            let filteredProducts = productsArray.filter(p => {
+                const categoryMatch = category === 'all' || p.category === category;
+                const keywordMatch = p.name.toLowerCase().includes(searchKeyword) || p.description.toLowerCase().includes(searchKeyword);
+                return categoryMatch && keywordMatch;
+            });
+
+            // 2. ソート
+            if (sortBy === 'price-asc') {
+                filteredProducts.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-desc') {
+                filteredProducts.sort((a, b) => b.price - a.price);
+            }
+
+            renderProductList(filteredProducts);
+        }
+
+        // 商品詳細ページをレンダリングする関数
+        function renderProductDetail(productId) {
+            const detail = productDetails[productId];
+            const detailPage = document.getElementById('product-detail-page');
+            
+            if (!detail) {
+                detailPage.innerHTML = '<p style="text-align: center; padding: 50px;">商品が見つかりませんでした。</p>';
+                return;
+            }
+            
+            let featuresHtml = '<ul>';
+            detail.features.forEach(f => featuresHtml += `<li>${f}</li>`);
+            featuresHtml += '</ul>';
+
+            let imageDisplay = `<img src="${detail.imageSrc}" alt="${detail.imageAlt}" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\\'padding:50px;color:#999\\'>画像読み込みエラー</div>'">`;
+
+            detailPage.innerHTML = `
+                <p style="margin-bottom: 30px;"><a href="#products" onclick="showPage('products'); return false;" style="text-decoration: none; color: var(--main-color); font-weight: bold; display: inline-flex; align-items: center;">&lt; 商品一覧へ戻る</a></p>
+                <h2>${detail.name}</h2>
+                
+                <div class="product-detail-area" style="display:flex; gap:40px; flex-wrap:wrap; margin-top: 40px;">
+                    <div class="detail-image-box" style="flex-shrink:0; max-width:400px; width: 100%;">
+                        ${imageDisplay} 
+                    </div> 
+                    <div class="product-detail-info" style="flex-grow:1; min-width:300px;">
+                        <p style="font-size: 1.8em; font-weight: bold; color: var(--accent-color); padding: 10px 0; border-bottom: 2px solid #eee;">${detail.priceDisplay}</p>
+                        
+                        <h3>製品概要</h3>
+                        <p>${detail.description}</p>
+                        
+                        <h3>主な仕様</h3>
+                        <p><strong>カテゴリ:</strong> ${detail.category === 'pen' ? '筆記具' : detail.category === 'eraser' ? '消す・修正' : '紙製品・ノート'}</p>
+                        ${featuresHtml}
+                        
+                        <h3 style="margin-top: 30px;">ご購入・お問い合わせ</h3>
+                        <p>この商品は全国の文具店、またはオンラインストアにてお買い求めいただけます。</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // URLハッシュに基づいてページをロードする関数
+        function loadPageFromHash() {
+            const hash = window.location.hash || '#index';
+            const parts = hash.substring(1).split('/');
+            const pageId = parts[0];
+            const productId = parts[1] || null;
+
+            // newsアンカーはトップページへ
+            if (pageId === 'news') {
+                showPage('index', null, true);
+                document.getElementById('news-anchor').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                showPage(pageId, productId, true);
+            }
+        }
+        
+        // カテゴリナビゲーションのイベント設定
+        function setupProductNavListeners() {
+            document.querySelectorAll('.product-nav-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = item.getAttribute('data-category-link');
+                    
+                    showPage('products');
+                    // フィルターを該当カテゴリに設定して再フィルタリング
+                    document.getElementById('category-filter').value = category;
+                    document.getElementById('search-box').value = '';
+                    filterAndSortProducts();
+                });
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初期表示をURLハッシュからロード
+            loadPageFromHash();
+
+            // ニュースリストの生成
+            const newsList = document.getElementById('newsList');
+            news.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="date">${item.date}</span> <span>${item.text}</span>`;
+                newsList.appendChild(li);
+            });
+
+            // フィルタ・ソート機能のイベントリスナー設定 (PRODUCTSページ)
+            document.getElementById('category-filter').addEventListener('change', filterAndSortProducts);
+            document.getElementById('sort-select').addEventListener('change', filterAndSortProducts);
+            document.getElementById('search-box').addEventListener('input', filterAndSortProducts);
+
+            // ナビゲーションリンクのイベントリスナー設定 (History API対応)
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page');
+
+                    if (pageId !== 'index' || link.id === 'nav-products' || link.id === 'nav-company' || link.id === 'nav-recruitment' || link.id === 'nav-contact') {
+                         showPage(pageId);
+                    }
+                    // NEWS/TOPICSボタンはインデックスページでアンカーへスクロールするJSがあるため、そのまま続行
+                });
+            });
+            
+            // ブラウザの「戻る/進む」ボタンに対応
+            window.addEventListener('popstate', (e) => {
+                loadPageFromHash();
+            });
+            
+            // 製品ナビゲーターのイベントリスナー設定
+            setupProductNavListeners();
+        });
+    </script>
+</body>
+</html>
